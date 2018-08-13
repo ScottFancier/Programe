@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 baseurl:
+=======
+baseurl: /programe
+theme: jekyll-theme-cayman
+>>>>>>> a1026f0011a9df224e278b7678a7ff0d2c4d8c81
