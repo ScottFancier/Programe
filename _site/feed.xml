@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>潘柏信</title>
+    <title>彭超</title>
     <description>欢迎来到我的个人站~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 26 Aug 2018 18:25:00 +0800</pubDate>
-    <lastBuildDate>Sun, 26 Aug 2018 18:25:00 +0800</lastBuildDate>
+    <pubDate>Sun, 26 Aug 2018 19:18:20 +0800</pubDate>
+    <lastBuildDate>Sun, 26 Aug 2018 19:18:20 +0800</lastBuildDate>
     <generator>Jekyll v3.8.3</generator>
     
       <item>
-        <title>你好，世界</title>
-        <description>　　&lt;h2&gt;你好，世界&lt;/h2&gt;
-　　&lt;p&gt;我的第一篇文章&lt;/p&gt;
-　　&lt;p&gt;22 Aug 2018&lt;/p&gt;</description>
-        <pubDate>Wed, 22 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2018/08/Hello-FirstPage/</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/08/Hello-FirstPage/</guid>
+        <title>配置GitHub</title>
+        <description>&lt;h1 id=&quot;开源中国社区&quot;&gt;开源中国社区&lt;/h1&gt;
+&lt;h3 id=&quot;header-3&quot;&gt;Header 3&lt;/h3&gt;
+&lt;p&gt;This is a blockquote.
+This is the second paragraph in the blockquote.&lt;/p&gt;
+
+&lt;h2 id=&quot;this-is-an-h2-in-a-blockquote&quot;&gt;This is an H2 in a blockquote&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for(int i=0;i&amp;lt;10;i++)
+{
+	Random rd = new Random();
+    Console.WriteLine(rd.Next(10,100).ToString());
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 03 Jan 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/01/GitHub_%E9%85%8D%E7%BD%AEGitHub/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/01/GitHub_%E9%85%8D%E7%BD%AEGitHub/</guid>
+        
+        <category>iOS</category>
         
         
       </item>
@@ -37,9 +50,11 @@ This is the second paragraph in the blockquote.&lt;/p&gt;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>Wed, 22 Aug 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2018/08/GitHub-%E9%85%8D%E7%BD%AEGitHub/</link>
-        <guid isPermaLink="true">http://localhost:4000/2018/08/GitHub-%E9%85%8D%E7%BD%AEGitHub/</guid>
+        <pubDate>Tue, 03 Jan 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/01/GitHub-%E9%85%8D%E7%BD%AEGitHub/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/01/GitHub-%E9%85%8D%E7%BD%AEGitHub/</guid>
+        
+        <category>iOS</category>
         
         
       </item>
