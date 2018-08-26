@@ -5,19 +5,19 @@ title: 彭超
 subtitle: 个人站
 description: 欢迎来到我的个人站~
 # 头像里面的标题
-avatarTitle: ScottFancier
+avatarTitle: Developer
 # 头像里面的描述
-avatarDesc: iOS / 机器学习
+avatarDesc: 程序爱好者
 url: "http://baixin.io"
 
 # Comment
 comment:
-    disqus: leopard
+    disqus: Scott
     # uyan: 2143225  # 有言id,登录有言官网申请
 
 # Social
 social:
-    weibo: 5366874726 
+    #weibo: 5366874726 
     github: ScottFancier
     # twitter: 
     mail: Scott.Fancier@outlook.com
