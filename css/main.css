@@ -924,11 +924,12 @@ img::-moz-selection {
   float: left;
   color: #4F4F4F;
 }
-
+/* 这个好像没用到
 .post-list__divider {
   width: 30%;
   margin: 2.2em 0 2.1em 0;
   border-top: 1px solid #DDDDDD; }
+*/
 
 *:focus {
   outline: none; }

@@ -11,9 +11,9 @@ avatarDesc: 程序爱好者
 url: "http://jekyllthemes.org"
 
 # Comment
-#comment:
-    #disqus: leopard
-    # uyan: 2143225  # 有言id,登录有言官网申请
+comment:
+    #uyan: 2143225
+    disqus: leopard
 
 # Social
 social:
@@ -68,5 +68,6 @@ nav:
 gems: [jekyll-paginate,jekyll-sitemap]
 paginate: 20
 paginate_path: "page/:num/"
+
 
 
