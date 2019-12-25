@@ -41,7 +41,7 @@ gem install bundler jekyll 安装jekyll，这个安装过程有点慢，请耐�
 ![](/images/posts/IntallJekyll/10.png)
 4.5 安装步骤如下图，如果是新建按照1->1.1->3步骤，如果是迁移或者是拷贝按照1->2->3步骤
 ![](/images/posts/IntallJekyll/5.png)
-4.6 点<a href="{{site.url}}/files/install jekyll.7z">此处下载</a>批处理文件。用记事本打开批处理文件，根据自己情况更改文件的路径  
+4.6 点<a href="{{site.baseUrl}}/files/install jekyll.7z">此处下载</a>批处理文件。用记事本打开批处理文件，根据自己情况更改文件的路径  
 ![](/images/posts/IntallJekyll/14.png)
 ### 5.Jekyll模板
 1.1 从[http://jekyllthemes.org/](http://jekyllthemes.org/)选择模板。

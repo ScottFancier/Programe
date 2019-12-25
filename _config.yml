@@ -9,6 +9,7 @@ avatarTitle: Developer
 # 头像里面的描述
 avatarDesc: 程序爱好者
 url: "http://jekyllthemes.org"
+baseUrl: "http://blog.codefans.com.cn"
 
 # Comment
 comment:
