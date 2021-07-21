@@ -44,5 +44,11 @@ gem install bundler jekyll 安装jekyll，这个安装过程有点慢，请耐�
 4.6 点<a href="{{site.baseUrl}}/files/install jekyll.7z">此处下载</a>批处理文件。用记事本打开批处理文件，根据自己情况更改文件的路径  
 ![](/images/posts/IntallJekyll/14.png)
 ### 5.Jekyll模板
-1.1 从[http://jekyllthemes.org/](http://jekyllthemes.org/)选择模板。
+5.1 从[http://jekyllthemes.org/](http://jekyllthemes.org/)选择模板。
+### 6.错误排查
+6.1 从github上拉取的模板，运行 bundle exec jekyll serve时报错，说明运行环境中有指定bundle的版本，文件夹中找到.gemspec文档，修改版本号和当前安装一致就行了。
+![](/images/posts/IntallJekyll/15.png)
+如上截图版本号1.12改为2.1.2，然后运行bundle exec jekyll serve正常。
+![](/images/posts/IntallJekyll/16.png)
+
 
