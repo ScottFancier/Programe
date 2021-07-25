@@ -12,9 +12,9 @@
 }
 .share-dialog{
     position: fixed;
-    left: 70%;
+    left: 72%;
     top: 50%;
-    width: 280px;
+    width: 270px;
     height: 150px;
     margin:-135px 0 0 -250px;
     background: #fff;
