@@ -13,8 +13,10 @@ baseUrl: "http://blog.codefans.com.cn"
 
 # Comment
 comment:
-    #uyan: 2143225
     #disqus: leopard
+    #livere: MTAyMC81MDk5NC8yNzQ3Ng  # https://www.livere.com
+    # disqus: leopard
+    # uyan: 2143225  # 有言id,登录有言官网申请
 
 # Social
 social:
@@ -40,7 +42,6 @@ social:
 #
 #
 #  _post/ 下的文章更换成你自己的文章
-#  帮忙star一下，感谢~😆 地址： https://github.com/leopardpan/leopardpan.github.io
 #
 #
 # 《--------------- 下面的信息可以自行选择是否修改 ------------------------》
