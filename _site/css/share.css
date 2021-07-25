@@ -12,9 +12,9 @@
 }
 .share-dialog{
     position: fixed;
-    left: 72%;
+    left: 73%;
     top: 50%;
-    width: 270px;
+    width: 260px;
     height: 150px;
     margin:-135px 0 0 -250px;
     background: #fff;
@@ -37,7 +37,7 @@
     background: #eee;
 }
 .share-dialog .share-dialog-cont{
-    padding:20px 80px;
+    padding:20px 60px;
     font-size: 14px;
 }
 .share-dialog .share-copy-l{
