@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>集群、分布式、微服务概念和区别</title>
+  <meta name="description" content="概念:集群是个物理形态，分布式是个工作方式。  1.分布式：一个业务分拆多个子业务，部署在不同的服务器上  2.集群：同一个业务，部署在多个服务器上  3.分布式是指将不同的业务分布在不同的地方。而集群指的是将几台服务器集中在一起，实现同一业务。">
+  <meta name="author" content="leopardpan">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="集群、分布式、微服务概念和区别">
+  <meta name="twitter:description" content="概念:集群是个物理形态，分布式是个工作方式。  1.分布式：一个业务分拆多个子业务，部署在不同的服务器上  2.集群：同一个业务，部署在多个服务器上  3.分布式是指将不同的业务分布在不同的地方。而集群指的是将几台服务器集中在一起，实现同一业务。">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="集群、分布式、微服务概念和区别">
+  <meta property="og:description" content="概念:集群是个物理形态，分布式是个工作方式。  1.分布式：一个业务分拆多个子业务，部署在不同的服务器上  2.集群：同一个业务，部署在多个服务器上  3.分布式是指将不同的业务分布在不同的地方。而集群指的是将几台服务器集中在一起，实现同一业务。">
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+  
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
+  
+  <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+  <script type="text/javascript" src="http://cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+  <script type="text/javascript" src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="http://cdn.bootcss.com/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+  
+  
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"  />
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css" />
+  <link rel="canonical" href="http://localhost:4000/2021/07/%E9%9B%86%E7%BE%A4-%E5%88%86%E5%B8%83%E5%BC%8F-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A6%82%E5%BF%B5/">
+  <link rel="alternate" type="application/rss+xml" title="零距离" href="http://localhost:4000/feed.xml" />
+  <link rel="stylesheet" href="/css/main.css" >
+  
+  <!-- 站点统计 -->
+  <!-- 以下的统计方式失效，改用最新的 -->
+  <!-- <script 
+  async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script> -->
+ <script 
+  async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <!-- 百度统计 -->
+  
+
+  <!-- google 统计 -->
+  
+
+<!--
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9005224472374751",
+    enable_page_level_ads: true
+  });
+</script>
+-->
+
+</head>
+
+  
+  
+  
+  <body>
+
+    <span class="mobile btn-mobile-menu">        
+      <div class="nav_container">
+         <nav class="nav-menu-item" style = "float:right">
+            <i class="nav-menu-item">
+              <a href="/#blog" title="" class="blog-button">  博客主页
+              </a>
+            </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/archive" title="archive" class="btn-mobile-menu__icon">
+                      所有文章
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/tags" title="tags" class="btn-mobile-menu__icon">
+                      标签
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/about" title="about" class="btn-mobile-menu__icon">
+                      关于我
+                  </a>
+                </i>
+            
+          </nav>
+      </div>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/images/background-cover.jpg')">
+	<div class="panel-main">
+		<div class="panel-main__inner panel-inverted">
+			<div class="panel-main__content">
+				<!-- 头像效果-start -->
+				<div class="ih-item circle effect right_to_left">            
+					<a href="/#blog" title="前往 零距离 的主页" class="blog-button">
+						<div class="img"><img src="/images/avatar.jpg" alt="img"></div>
+						<div class="info">
+							<div class="info-back">
+								<h2> 
+									
+										Developer
+									
+								</h2>
+								<p>
+									
+										程序爱好者
+									
+								</p>
+							</div>
+						</div>
+					</a>
+				</div>
+				<!-- 头像效果-end -->
+				<h1 class="panel-cover__title panel-title">
+						<a href="/#blog" title="link to homepage for 零距离" class="blog-button">零距离</a>
+					</h1>
+				
+				<span class="panel-cover__subtitle panel-subtitle">个人站</span>
+				
+				<hr class="panel-cover__divider" />
+				<p class="panel-cover__description">欢迎来到我的个人站~</p>
+				<hr class="panel-cover__divider panel-cover__divider--secondary" />
+					
+				<div class="navigation-wrapper">
+					<div>
+						<nav class="cover-navigation cover-navigation--primary">
+							<ul class="navigation">
+								<li class="navigation__item"><a href="/#blog" title="" class="blog-button">博客主页</a></li>
+								
+								<li class="navigation__item"><a href="/archive" title="archive">所有文章</a></li>
+								
+								<li class="navigation__item"><a href="/tags" title="tags">标签</a></li>
+								
+								<li class="navigation__item"><a href="/about" title="about">关于我</a></li>
+								
+							</ul>
+						</nav>
+					</div>          
+				</div>
+			</div>
+		</div>
+		
+		<div class="panel-cover--overlay cover-clear"></div>
+		
+	</div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title">集群、分布式、微服务概念和区别</h1>
+    <div class="post-meta">
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2021-07-20 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2021-07-20</time>  
+         
+      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+    </p>
+    </div>
+  </header>
+
+  <section class="post">
+    <h3 id="概念">概念:</h3>
+<p>集群是个物理形态，分布式是个工作方式。</p>
+<ul>
+  <li>1.分布式：一个业务分拆多个子业务，部署在不同的服务器上</li>
+  <li>2.集群：同一个业务，部署在多个服务器上</li>
+  <li>3.分布式是指将不同的业务分布在不同的地方。而集群指的是将几台服务器集中在一起，实现同一业务。</li>
+</ul>
+
+<p><strong>1.分布式是指将不同的业务分布在不同的地方。而集群指的是将几台服务器集中在一起，实现同一业务。</strong></p>
+
+<p>分布式中的每一个节点，都可以做集群。而集群并不一定就是分布式的。</p>
+
+<p>举例：就比如新浪网，访问的人多了，他可以做一个群集，前面放一个响应服务器，后面几台服务器完成同一业务，如果有业务访问的时候，响应服务器看哪台服务器的负载不是很重，就将给哪一台去完成。</p>
+
+<p>而分布式，从窄意上理解，也跟集群差不多，但是它的组织比较松散，不像集群，有一个组织性，一台服务器垮了，其它的服务器可以顶上来。
+<strong>分布式的每一个节点，都完成不同的业务，一个节点垮了，那这个业务就不可访问了。</strong></p>
+
+<p><strong>2：简单说，分布式是以缩短单个任务的执行时间来提升效率的，而集群则是通过提高单位时间内执行的任务数来提升效率。</strong></p>
+
+<p>例如：如果一个任务由 10 个子任务组成，每个子任务单独执行需 1 小时，则在一台服务器上执行该任务需 10 小时。</p>
+
+<p>采用分布式方案，提供 10 台服务器，每台服务器只负责处理一个子任务，不考虑子任务间的依赖关系，执行完这个任务只需一个小时。(这种工作模式的一个典型代表就是 Hadoop 的 Map/Reduce 分布式计算模型）</p>
+
+<p>而采用集群方案，同样提供 10 台服务器，每台服务器都能独立处理这个任务。假设有 10 个任务同时到达，10 个服务器将同时工作，1 小时后，10 个任务同时完成，这样，整身来看，还是 1 小时内完成一个任务！</p>
+
+<p>好的设计应该是分布式和集群的结合，先分布式再集群，具体实现就是业务拆分成很多子业务，然后针对每个子业务进行集群部署，这样每个子业务如果出了问题，整个系统完全不会受影响。</p>
+
+<p>另外，还有一个概念和分布式比较相似，那就是微服务。</p>
+
+<p><strong>微服务是一种架构风格，一个大型复杂软件应用由一个或多个微服务组成。系统中的各个微服务可被独立部署，各个微服务之间是松耦合的。每个微服务仅关注于完成一件任务并很好地完成该任务。在所有情况下，每个任务代表着一个小的业务能力。</strong></p>
+
+<h3 id="区别">区别:</h3>
+
+<ul>
+  <li>1.分布式</li>
+</ul>
+
+<p><img src="/images/posts/Jiqun/1.png" alt="" /></p>
+
+<p>将一个大的系统划分为多个业务模块，业务模块分别部署到不同的机器上，各个业务模块之间通过接口进行数据交互。区别分布式的方式是根据不同机器不同业务。</p>
+
+<p>上面：service A、B、C、D 分别是业务组件，通过API Geteway进行业务访问。
+注：分布式需要做好事务管理。</p>
+
+<ul>
+  <li>2.集群模式</li>
+</ul>
+
+<p><img src="/images/posts/Jiqun/2.png" alt="" /></p>
+
+<p>集群模式是不同服务器部署同一套服务对外访问，实现服务的负载均衡。区别集群的方式是根据部署多台服务器业务是否相同。</p>
+
+<p>注：集群模式需要做好session共享，确保在不同服务器切换的过程中不会因为没有获取到session而中止退出服务。</p>
+
+<p>一般配置Nginx<strong>的负载容器实现：静态资源缓存、Session共享可以附带实现，Nginx支持5000个并发量。</strong></p>
+
+<ul>
+  <li>3.分布式是否属于微服务？</li>
+</ul>
+
+<p>微服务的意思也就是将模块拆分成一个独立的服务单元通过接口来实现数据的交互。</p>
+
+<ul>
+  <li>4.微服务架构</li>
+</ul>
+
+<p>微服务与分布式的细微差别是，微服务的应用不一定是分散在多个服务器上，他也可以是同一个服务器。</p>
+
+<p><img src="/images/posts/Jiqun/3.png" alt="" /></p>
+
+<p>分布式和微服的架构很相似，只是部署的方式不一样而已。</p>
+
+
+
+  </section>
+</article>
+
+<section>
+
+            <div class="content-play">
+              
+              <a href="javascript:void(0)" onclick="ShareToggle()"   class="dashang" title="分 享">分 享</a>
+				  
+				  <a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="赞 助">赞 助</a>
+				  <div class="hide_box-play"></div>
+              <div class="shang_box-play">
+                <a class="shang_close-play" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="/images/payimg/close.jpg" alt="取消" /></a>
+                <div class="shang_tit-play">
+                  <p>感谢您的支持，我会继续努力的!</p>
+                </div>
+                <div class="shang_payimg">
+                    <img src="/images/payimg/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+                </div>
+              <div class="shang_payimg">    
+                    <img src="/images/payimg/weipayimg.jpg" alt="扫码支持" title="扫一扫" />
+                </div>
+                <div class="pay_explain">扫码打赏，你说多少就多少</div>
+                <div class="shang_payselect">
+                  <div class="pay_item checked" data-id="alipay">
+                    <span class="pay_logo"><img src="/images/payimg/alipay.jpg" alt="支付宝" /></span>
+                  </div>
+                  <div class="pay_item" data-id="weipay">
+                    <span class="pay_logo"><img src="/images/payimg/wechat.jpg" alt="微信" /></span>
+                  </div>
+                </div>
+                <div class="shang_info-play">
+                  <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+                </div>
+              </div>
+            </div>
+            <div class="share_box-play">
+					
+<!--<a href="http://v.t.sina.com.cn/share/share.php?url="+'/2021/07/%E9%9B%86%E7%BE%A4-%E5%88%86%E5%B8%83%E5%BC%8F-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A6%82%E5%BF%B5/' target="_blank">新浪微博</a>--> 
+<div class="share-dialog">
+<div class="share-close" onclick="ShareToggle()"></div>
+<div class="share-dialog-title">分享</div>
+<div class="share-dialog-cont">
+	<div class="share-platform">
+		<div class="share-platform-r">
+			<div class="bdsharebuttonbox">
+				<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+				<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+				<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+				<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"分享到新浪微博","bdMini":"1","bdMiniList":["bdxc","tqf","douban","bdhome","sqq","thx","ibaidu","meilishuo","mogujie","diandian","huaban","duitang","hx","fx","youdao","sdo","qingbiji","people","xinhua","mail","isohu","yaolan","wealink","ty","iguba","fbook","twi","linkedin","h163","evernotecn","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!--<script>
+	var g_url = window.location.href;
+	$('.share-copy-c input').val(g_url);
+	var clip = new ZeroClipboard( document.getElementById("btnCopy"));
+</script>-->
+				</div>
+				<script type="text/javascript">
+            function dashangToggle(){
+              $(".hide_box-play").fadeToggle();
+              $(".shang_box-play").fadeToggle();
+            }
+				function ShareToggle(){
+					$(".hide_box-play").fadeToggle();
+					$(".share_box-play").fadeToggle();
+				}
+            </script>
+
+            <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+            <style type="text/css">
+              .content-play{width:60%;margin-top: 20px;margin-left: auto;margin-bottom: 10px;height:40px;}
+              .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+              .shang_box-play{width:500px;height:450px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:60%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+              .shang_box-play img{border:none;border-width:0;}
+              .dashang{width:100px;margin:5px auto;height:25px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+              .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+              .shang_close-play{float:right;display:inline-block;
+                margin-right: 10px;margin-top: 20px;
+              }
+				  
+				  .share_box-play{display:none;}
+              .shang_logo{display:block;text-align:center;margin:20px auto;}
+              .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+              .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+              .shang_payimg{padding-left: 60px; /*border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+              .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+              .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+              .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:70px;}
+              .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+              .shang_info-play{clear:both;}
+              .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+            </style>
+
+       <ul class="pager">
+        
+        <li class="previous">
+            <a href="/2021/06/Jekyll%E7%9B%AE%E5%BD%95%E8%AE%B2%E8%A7%A3/" data-toggle="tooltip" data-placement="top" title="Jekyll目录">上一篇：  <span>Jekyll目录</span>
+            </a>
+        </li>
+        
+        
+    </ul>
+</section>
+
+<section class="post-comments">
+
+  
+
+</section>
+
+
+            <section class="footer">
+    <footer>
+        <div class = "footer_div">  
+        <nav class="cover-navigation navigation--social">
+          <ul class="navigation">
+
+          
+
+          
+          <!-- Github -->
+          <li class="navigation__item_social">
+            <a href="https://github.com/ScottFancier" title="@ScottFancier 的 Github" target="_blank">
+              <i class='social fa fa-github fa-2x'></i>
+              <span class="label">Github</span>
+            </a>
+          </li>
+          
+          
+          
+          <!-- Twitter -->
+          <li class="navigation__item_social">
+            <a href="http://twitter.com/ScottFancier" title="@ScottFancier" target="_blank">
+              <i class='social fa fa-twitter fa-2x'></i>
+              <span class="label">Twitter</span>
+            </a>
+          </li>
+          
+
+          
+          <!-- Google Plus -->
+          <li class="navigation__item_social">
+            <a href="https://plus.google.com/102393737732006715993" rel="author" title="Google+" target="_blank">
+              <i class='social fa fa-google-plus-square fa-2x'></i>
+              <span class="label">Google Plus</span>
+            </a>
+          </li>
+          
+
+          <!-- RSS -->
+          <li class="navigation__item_social">
+            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+              <i class='social fa fa-rss fa-2x'></i>
+              <span class="label">RSS</span>
+            </a>
+          </li>
+
+          
+          <!-- Email -->
+          <li class="navigation__item_social">
+            <a href="mailto:Scott.Fancier@outlook.com" title="Contact me">
+              <i class='social fa fa-envelope fa-2x'></i>
+              <span class="label">Email</span>
+            </a>
+          </li>
+          
+
+          </ul>
+        </nav>
+
+        </div>
+
+        <div class = "footer_div">  
+           <p class="copyright text-muted" style="text-align:center">
+            Copyright &copy; 零距离 2021 |
+            <iframe
+                style="margin-left: 2px; margin-bottom:-5px;"
+                frameborder="0" scrolling="0" width="91px" height="20px"
+                src="https://ghbtns.com/github-btn.html?user=Scottfancier&repo=Programe&type=star&count=true" >
+            </iframe>
+				 <!-- 访问统计 -->
+				 <span id="busuanzi_container_site_pv">
+					本站总访问量
+					<span id="busuanzi_value_site_pv"></span>次
+				 </span>
+            </p>
+        	<div align="right">
+    			<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+          
+
+        </div>
+        <div>
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <!--
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+-->
+
+<!--
+<link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+-->
+
+<!--
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css" />-->
+
+<!--
+<script type="text/javascript" src="http://cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://cdn.bootcss.com/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript" src="http://cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+-->
+
+<script type="text/javascript" src="/js/main.js"></script>
+<link rel="stylesheet" href="/css/share.css">
+<script src="/js/ZeroClipboard.js"></script>
+<script type="text/javascript" src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    <div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+    <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
+
+    <div style="position: fixed; top: 16px; right: 16px;">
+        <img src="/images/cb-close.png"  id="cb-close-btn"/>
+    </div>
+</div>
+
+<div style="position: fixed; right: 16px; bottom: 20px;">
+    <img src="/images/cb-search.png"  id="cb-search-btn"  title="双击ctrl试一下"/>
+</div>
+
+<link rel="stylesheet" href="/css/cb-search.css">
+
+<script src="/js/cb-search.js" ></script>
+
+  </body>
+
+</html>
