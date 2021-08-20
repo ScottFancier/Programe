@@ -5,9 +5,43 @@
     <description>欢迎来到我的个人站~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 29 Jul 2021 13:44:30 +0800</pubDate>
-    <lastBuildDate>Thu, 29 Jul 2021 13:44:30 +0800</lastBuildDate>
+    <pubDate>Fri, 20 Aug 2021 09:35:17 +0800</pubDate>
+    <lastBuildDate>Fri, 20 Aug 2021 09:35:17 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>jekyll无法本地预览中文文件的问题</title>
+        <description>&lt;p&gt;最近在使用jekyll在本地预览自己写的博客无法正常打开，而提交到github上却可以正常解析。看了一下发现是文件写的博客有什么变化，原来是因为博客的markdown文件使用了中文文件名，jekyll无法正常解析出现乱码。&lt;br /&gt;
+然后在网上找到这个解决方法：&lt;br /&gt;
+修改安装目录（根据安装Ruby版本路径有所不同）\Ruby26-x64\lib\ruby\2.6.0\webrick\httpservlet下的filehandler.rb文件，建议先备份。&lt;br /&gt;
+找到下列两处，添加一句（+的一行为添加部分，添加的时候去掉+）&lt;br /&gt;
+1&lt;/p&gt;
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;path_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;dup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;force_encoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Encoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;filesystem&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;force_encoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 加入编码&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trailing_pathsep?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;path_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;•&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;•&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;•&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;2&lt;/p&gt;
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;break&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;base&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/&quot;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;force_encoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#加入編碼&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;break&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;directory?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;expand_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;filename&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;•&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;•&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;•&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;修改完重新jekyll serve即可支持中文文件名。&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 19 Aug 2021 18:15:06 +0800</pubDate>
+        <link>http://localhost:4000/2021/08/jekyll%E6%97%A0%E6%B3%95%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+        <guid isPermaLink="true">http://localhost:4000/2021/08/jekyll%E6%97%A0%E6%B3%95%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+        
+        <category>个人博客搭建</category>
+        
+        
+      </item>
     
       <item>
         <title>集群、分布式、微服务概念和区别</title>
@@ -955,63 +989,6 @@ hexo version  #查看Hexo的版本
         <guid isPermaLink="true">http://localhost:4000/2020/08/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
         
         <category>个人博客搭建</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>开发常用工具</title>
-        <description>&lt;p&gt;工欲善其事必先利其器，选择一些好的工具可以成吨的提高自己的工作效率。&lt;/p&gt;
-
-&lt;h3 id=&quot;个人开发常用工具的收集&quot;&gt;个人开发常用工具的收集&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.zybuluo.com/mdeditor&quot;&gt;cmd Markdown&lt;/a&gt; 作业部落出版的Markdown编辑器&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/rest-client/rest-client&quot;&gt;RESTClient&lt;/a&gt; 一个开源的客户端HTTP调试工具。&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/getlantern/lantern&quot;&gt;lantern&lt;/a&gt; 蓝灯,一款开源的翻墙工具。&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.charlesproxy.com/&quot;&gt;Charles&lt;/a&gt; 青花瓷, 一款HTTP/HTTPS的抓包工具。
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;http://blog.devtang.com/2015/11/14/charles-introduction/&quot;&gt;Charles 从入门到精通&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.sublimetext.com&quot;&gt;Sublime&lt;/a&gt; 一款强大的IDE,支持Python、JS、JSON格式化等等…更重要的是&lt;code class=&quot;highlighter-rouge&quot;&gt;Sublime&lt;/code&gt;支持的插件很多。
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;http://www.xuanfengge.com/practical-collection-of-sublime-plug-in.html&quot;&gt;实用的sublime插件集合&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;文章配图网站&quot;&gt;文章配图网站&lt;/h3&gt;
-
-&lt;p&gt;还在为文章配图而苦恼吗？点击店面的网站吧，各种各样的图片帮你丰富你的文章。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.gratisography.com/&quot;&gt;Gratisography&lt;/a&gt; gratisography 里面的图片每周都会更新，很多时尚流行的照片在里面，并且适合用在设计项目上。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.ssyer.com/home-index.html&quot;&gt;ssyer&lt;/a&gt;国内的网站，不需要翻墙，速度很快，图片最全。完全免费的图片库。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://pixabay.com/&quot;&gt;Pixabay&lt;/a&gt; 不同类型的高清摄影照片。&lt;/p&gt;
-
-&lt;h3 id=&quot;ui设计网站&quot;&gt;UI设计网站&lt;/h3&gt;
-
-&lt;p&gt;作为一个开发者，自己写些小程序的时候经常会为没有UI而烦恼，下面就是一些UI设计网站，有新颖的UI界面设计，也有单独的UI元素，icon等。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.ui.cn/&quot;&gt;UI中国&lt;/a&gt; 国内潮流的UI设计作品。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.webdesigndev.com/&quot;&gt;webdesigndev&lt;/a&gt; 国外网站设计文章，各种各样的资料看到你眼花缭乱。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://dribbble.com/&quot;&gt;dribbble&lt;/a&gt; 接触过设计的应该都知道，一个很好的UI设计平台。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.flaticon.com/&quot;&gt;flaticon&lt;/a&gt; 各种icon的设计，一定有你想想要的。&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;转载请注明：&lt;a href=&quot;http://baixin&quot;&gt;潘柏信的博客&lt;/a&gt; » &lt;a href=&quot;http://baixin.io/2016/06/Develop_Tool/&quot;&gt;点击阅读原文&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Tue, 02 Jun 2020 19:15:06 +0800</pubDate>
-        <link>http://localhost:4000/2020/06/Develop_Tool/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/06/Develop_Tool/</guid>
-        
-        <category>工具</category>
         
         
       </item>
