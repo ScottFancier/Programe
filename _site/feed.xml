@@ -5,8 +5,8 @@
     <description>欢迎来到我的个人站~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 08 Sep 2021 14:52:56 +0800</pubDate>
-    <lastBuildDate>Wed, 08 Sep 2021 14:52:56 +0800</lastBuildDate>
+    <pubDate>Wed, 08 Sep 2021 17:39:55 +0800</pubDate>
+    <lastBuildDate>Wed, 08 Sep 2021 17:39:55 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -30,7 +30,7 @@
 
 &lt;blockquote&gt;
   &lt;ul&gt;
-    &lt;li&gt;-bash:vim:common not found “&lt;/li&gt;
+    &lt;li&gt;-bash:vim:common not found&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/blockquote&gt;
 
@@ -42,13 +42,21 @@
 &lt;strong&gt;推荐的一键安装脚本&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
   &lt;ul&gt;
-    &lt;li&gt;sudo -i “&lt;/li&gt;
-    &lt;li&gt;bash &amp;lt;(curl -s -L https://git.io/v2ray.sh)”&lt;/li&gt;
+    &lt;li&gt;sudo -i&lt;/li&gt;
+    &lt;li&gt;bash &amp;lt;(curl -s -L https://git.io/v2ray.sh)&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;如下截图输入1安装，其他参数可以默认，只需要回车执行下一步（除非你有特别要求）   &lt;img src=&quot;/images/posts/v2ray/1.png&quot; /&gt;&lt;br /&gt;
-安装完成后输入systemctl status v2ray.service命令查看状态。&lt;br /&gt;
+&lt;p&gt;如下截图输入1安装，其他参数可以默认，只需要回车执行下一步（除非你有特别要求） &lt;br /&gt;
+&lt;img src=&quot;/images/posts/v2ray/1.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/images/posts/v2ray/2.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/images/posts/v2ray/3.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/images/posts/v2ray/4.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/images/posts/v2ray/5.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/images/posts/v2ray/6.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+安装完成后显示如下界面
+&lt;img src=&quot;/images/posts/v2ray/7.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+输入systemctl status v2ray.service命令查看服务状态。&lt;br /&gt;
 &lt;img src=&quot;/images/posts/v2ray/8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;4.&amp;gt;配置及管理
@@ -73,7 +81,7 @@ v2ray update.sh 更新 V2Ray 管理脚本&lt;br /&gt;
 v2ray uninstall 卸载 V2Ray&lt;/p&gt;
 
 &lt;h3 id=&quot;客户端的安装配置&quot;&gt;客户端的安装，配置&lt;/h3&gt;
-&lt;p&gt;1.&amp;gt; 软件下载
+&lt;p&gt;1.&amp;gt; 软件下载&lt;br /&gt;
 V2RayW Win
 下载：&lt;a href=&quot;https://github.com/Cenmrev/V2RayW&quot;&gt;https://github.com/Cenmrev/V2RayW&lt;/a&gt;&lt;br /&gt;
 V2RayN Win
@@ -100,7 +108,15 @@ V2RayX MAC
 &lt;h3 id=&quot;问题点&quot;&gt;问题点&lt;/h3&gt;
 &lt;p&gt;1.&amp;gt; 安装完成后还是无法访问google&lt;br /&gt;
 右键点击v2rayN查看系统代理，选择自动配置系统代理
-&lt;img src=&quot;/images/posts/v2ray/13.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/images/posts/v2ray/13.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+2.&amp;gt; v2ray并没有监听我们的公网IP&lt;br /&gt;
+运行命令 netstat -apn | grep v2ray 发现v2ray并没有监听我们的公网IP，只监听了一个IPV6&lt;br /&gt;
+&lt;img src=&quot;/images/posts/v2ray/16.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+看来可能是v2ray获取IP导致的问题，这样我们能不能指定IP让v2ray去监听？&lt;br /&gt;
+放Google搜了一把，发现v2ray还真有这个配置，只是v2ray官方文档也没有很详细说这个问题，也只是带了一下,但是好歹也给我们提供了一种解决方式。&lt;br /&gt;
+按照文档中说的，我们可以在配置文件中添加一个listen字段，用于指定v2ray监听指定的IP。&lt;br /&gt;
+v2ray默认配置文件在/etc/v2ray/config.json，我们只需编辑这个文件并添加一行就行了：&lt;br /&gt;
+&lt;img src=&quot;/images/posts/v2ray/17.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 07 Sep 2021 00:00:00 +0800</pubDate>
@@ -408,9 +424,6 @@ gem install bundler jekyll 安装jekyll，这个安装过程有点慢，请耐�
 然后切换到 dev 分支上，在使用 git branch merge temp，就可以把 temp 分支上的代码合并到 dev 上了。&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;转载请注明：&lt;a href=&quot;http://baixin&quot;&gt;潘柏信的博客&lt;/a&gt; » &lt;a href=&quot;http://baixin.io/2016/07/GitTutorial/&quot;&gt;点击阅读原文&lt;/a&gt;&lt;/p&gt;
-
 </description>
         <pubDate>Sun, 13 Jun 2021 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2021/06/GitTutorial/</link>
@@ -510,8 +523,6 @@ H6 :###### Header 6    &lt;br /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;转载请注明：&lt;a href=&quot;http://baixin&quot;&gt;潘柏信的博客&lt;/a&gt; » &lt;a href=&quot;http://baixin.io/2016/11/markdownTool/&quot;&gt;Markdown工具集&lt;/a&gt;&lt;/p&gt;
-
 </description>
         <pubDate>Fri, 20 Nov 2020 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2020/11/markdownTool/</link>
@@ -610,11 +621,7 @@ Customize Installation：可选安装路径、可选是否应用到所有用户�
   &lt;li&gt;&lt;a href=&quot;#编写文章&quot; id=&quot;markdown-toc-编写文章&quot;&gt;编写文章&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#使用我的博客模板&quot; id=&quot;markdown-toc-使用我的博客模板&quot;&gt;使用我的博客模板&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#如果你本机没配置过任何jekyll的环境可能会报错&quot; id=&quot;markdown-toc-如果你本机没配置过任何jekyll的环境可能会报错&quot;&gt;如果你本机没配置过任何jekyll的环境，可能会报错&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#修改成你自己的博客&quot; id=&quot;markdown-toc-修改成你自己的博客&quot;&gt;修改成你自己的博客&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#-如果想修改博客样式却不知道怎么修改可以直接在评论里给我提问-&quot; id=&quot;markdown-toc--如果想修改博客样式却不知道怎么修改可以直接在评论里给我提问-&quot;&gt;【 如果想修改博客样式却不知道怎么修改，可以直接在评论里给我提问 】&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#为什么要是用-jekyll&quot; id=&quot;markdown-toc-为什么要是用-jekyll&quot;&gt;为什么要是用 Jekyll&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#修改成你自己的博客&quot; id=&quot;markdown-toc-修改成你自己的博客&quot;&gt;修改成你自己的博客&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#qa&quot; id=&quot;markdown-toc-qa&quot;&gt;Q&amp;amp;A&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -858,16 +865,6 @@ Configuration file: /Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpa
 &lt;/blockquote&gt;
 
 &lt;p&gt;然后使用 git push 到你自己的仓库里面去，检查你远端仓库，在浏览器输入 username.github.io 就会发现，你有一个漂亮的主题模板了。&lt;/p&gt;
-
-&lt;h4 id=&quot;-如果想修改博客样式却不知道怎么修改可以直接在评论里给我提问-&quot;&gt;【 如果想修改博客样式却不知道怎么修改，可以直接在评论里给我提问 】&lt;/h4&gt;
-
-&lt;h3 id=&quot;为什么要是用-jekyll&quot;&gt;为什么要是用 Jekyll&lt;/h3&gt;
-
-&lt;p&gt;使用了 Jekyll 你会发现如果你想使用多台电脑发博客都很方便，只要把远端 github 仓库里的博客 clone 下来，写文章后再提交就可以了，Hexo 由于远端提交的是静态网页，所有无法直接写 Markdown 的文章。如果你想看 Hexo 搭建博客，可以看看我的另一篇&lt;a href=&quot;http://baixin.io/2015/08/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/&quot;&gt;HEXO搭建个人博客&lt;/a&gt;的教程。&lt;/p&gt;
-
-&lt;p&gt;如果你在搭建博客遇到问题，可以在&lt;a href=&quot;http://baixin.io/2016/10/jekyll_tutorials1/&quot;&gt;原文博客&lt;/a&gt;的评论里给我提问。&lt;/p&gt;
-
-&lt;p&gt;后面会继续介绍，在我的博客基础上，如何修改成你自己喜欢的 Style，欢迎继续关注我博客的更新。&lt;/p&gt;
 
 &lt;h3 id=&quot;qa&quot;&gt;Q&amp;amp;A&lt;/h3&gt;
 

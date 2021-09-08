@@ -192,7 +192,7 @@
 
 <blockquote>
   <ul>
-    <li>-bash:vim:common not found “</li>
+    <li>-bash:vim:common not found</li>
   </ul>
 </blockquote>
 
@@ -204,13 +204,21 @@
 <strong>推荐的一键安装脚本</strong></p>
 <blockquote>
   <ul>
-    <li>sudo -i “</li>
-    <li>bash &lt;(curl -s -L https://git.io/v2ray.sh)”</li>
+    <li>sudo -i</li>
+    <li>bash &lt;(curl -s -L https://git.io/v2ray.sh)</li>
   </ul>
 </blockquote>
 
-<p>如下截图输入1安装，其他参数可以默认，只需要回车执行下一步（除非你有特别要求）   <img src="/images/posts/v2ray/1.png" /><br />
-安装完成后输入systemctl status v2ray.service命令查看状态。<br />
+<p>如下截图输入1安装，其他参数可以默认，只需要回车执行下一步（除非你有特别要求） <br />
+<img src="/images/posts/v2ray/1.png" alt="" /><br />
+<img src="/images/posts/v2ray/2.png" alt="" /><br />
+<img src="/images/posts/v2ray/3.png" alt="" /><br />
+<img src="/images/posts/v2ray/4.png" alt="" /><br />
+<img src="/images/posts/v2ray/5.png" alt="" /><br />
+<img src="/images/posts/v2ray/6.png" alt="" /><br />
+安装完成后显示如下界面
+<img src="/images/posts/v2ray/7.png" alt="" /><br />
+输入systemctl status v2ray.service命令查看服务状态。<br />
 <img src="/images/posts/v2ray/8.png" alt="" /></p>
 
 <p>4.&gt;配置及管理
@@ -235,7 +243,7 @@ v2ray update.sh 更新 V2Ray 管理脚本<br />
 v2ray uninstall 卸载 V2Ray</p>
 
 <h3 id="客户端的安装配置">客户端的安装，配置</h3>
-<p>1.&gt; 软件下载
+<p>1.&gt; 软件下载<br />
 V2RayW Win
 下载：<a href="https://github.com/Cenmrev/V2RayW">https://github.com/Cenmrev/V2RayW</a><br />
 V2RayN Win
@@ -262,7 +270,15 @@ V2RayX MAC
 <h3 id="问题点">问题点</h3>
 <p>1.&gt; 安装完成后还是无法访问google<br />
 右键点击v2rayN查看系统代理，选择自动配置系统代理
-<img src="/images/posts/v2ray/13.png" alt="" /></p>
+<img src="/images/posts/v2ray/13.png" alt="" /><br />
+2.&gt; v2ray并没有监听我们的公网IP<br />
+运行命令 netstat -apn | grep v2ray 发现v2ray并没有监听我们的公网IP，只监听了一个IPV6<br />
+<img src="/images/posts/v2ray/16.png" alt="" /><br />
+看来可能是v2ray获取IP导致的问题，这样我们能不能指定IP让v2ray去监听？<br />
+放Google搜了一把，发现v2ray还真有这个配置，只是v2ray官方文档也没有很详细说这个问题，也只是带了一下,但是好歹也给我们提供了一种解决方式。<br />
+按照文档中说的，我们可以在配置文件中添加一个listen字段，用于指定v2ray监听指定的IP。<br />
+v2ray默认配置文件在/etc/v2ray/config.json，我们只需编辑这个文件并添加一行就行了：<br />
+<img src="/images/posts/v2ray/17.png" alt="" /></p>
 
 
 
