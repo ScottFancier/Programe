@@ -5,9 +5,112 @@
     <description>欢迎来到我的个人站~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 20 Aug 2021 09:35:17 +0800</pubDate>
-    <lastBuildDate>Fri, 20 Aug 2021 09:35:17 +0800</lastBuildDate>
+    <pubDate>Wed, 08 Sep 2021 14:52:56 +0800</pubDate>
+    <lastBuildDate>Wed, 08 Sep 2021 14:52:56 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>轻松搭建和配置V2Ray</title>
+        <description>&lt;h3 id=&quot;服务器端的安装配置&quot;&gt;服务器端的安装，配置&lt;/h3&gt;
+&lt;p&gt;1.&amp;gt;  系统要求&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Debian 9（推荐）&lt;/li&gt;
+  &lt;li&gt;Ubuntu 14&lt;/li&gt;
+  &lt;li&gt;Ubuntu 16&lt;/li&gt;
+  &lt;li&gt;CentOS 7&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;其他Linux版本不建议，官方安装脚本自行搜索(较麻烦，所以我直接删除了)&lt;/p&gt;
+
+&lt;p&gt;2.&amp;gt;  命令准备&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;vim：&lt;br /&gt;
+输入vim回车提示：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;-bash:vim:common not found “&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;输入命令：yum -y install vim-enhanced，开始下载安装作为依赖其他也会被安装进来（如果没有安装其他文件，则单独再进行安装）。&lt;br /&gt;
+安装完成后再次输入 vim 命令，有命令行的版本等信息显示，则安装成功。&lt;br /&gt;
+输入:q 回车退出。&lt;/p&gt;
+
+&lt;p&gt;3.&amp;gt; 安装V2Ray服务端&lt;br /&gt;
+&lt;strong&gt;推荐的一键安装脚本&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;sudo -i “&lt;/li&gt;
+    &lt;li&gt;bash &amp;lt;(curl -s -L https://git.io/v2ray.sh)”&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;如下截图输入1安装，其他参数可以默认，只需要回车执行下一步（除非你有特别要求）   &lt;img src=&quot;/images/posts/v2ray/1.png&quot; /&gt;&lt;br /&gt;
+安装完成后输入systemctl status v2ray.service命令查看状态。&lt;br /&gt;
+&lt;img src=&quot;/images/posts/v2ray/8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;4.&amp;gt;配置及管理
+V2Ray 配置文件路径：/etc/v2ray/config.json&lt;br /&gt;
+手动配置打开这个文件就好了，官方文档能看懂的就自己填。&lt;br /&gt;
+快速管理命令：&lt;br /&gt;
+v2ray info 查看 V2Ray 配置信息&lt;br /&gt;
+v2ray config 修改 V2Ray 配置&lt;br /&gt;
+v2ray link 生成 V2Ray 配置文件链接&lt;br /&gt;
+v2ray infolink 生成 V2Ray 配置信息链接&lt;br /&gt;
+v2ray qr 生成 V2Ray 配置二维码链接&lt;br /&gt;
+v2ray ss 修改 Shadowsocks 配置&lt;br /&gt;
+v2ray ssinfo 查看 Shadowsocks 配置信息&lt;br /&gt;
+v2ray ssqr 生成 Shadowsocks 配置二维码链接&lt;br /&gt;
+v2ray status 查看 V2Ray 运行状态&lt;br /&gt;
+v2ray start 启动 V2Ray&lt;br /&gt;
+v2ray stop 停止 V2Ray&lt;br /&gt;
+v2ray restart 重启 V2Ray&lt;br /&gt;
+v2ray log 查看 V2Ray 运行日志&lt;br /&gt;
+v2ray update 更新 V2Ray&lt;br /&gt;
+v2ray update.sh 更新 V2Ray 管理脚本&lt;br /&gt;
+v2ray uninstall 卸载 V2Ray&lt;/p&gt;
+
+&lt;h3 id=&quot;客户端的安装配置&quot;&gt;客户端的安装，配置&lt;/h3&gt;
+&lt;p&gt;1.&amp;gt; 软件下载
+V2RayW Win
+下载：&lt;a href=&quot;https://github.com/Cenmrev/V2RayW&quot;&gt;https://github.com/Cenmrev/V2RayW&lt;/a&gt;&lt;br /&gt;
+V2RayN Win
+下载：&lt;a href=&quot;https://github.com/2dust/v2rayN&quot;&gt;https://github.com/2dust/v2rayN&lt;/a&gt;&lt;br /&gt;
+V2RayX MAC
+下载：&lt;a href=&quot;https://github.com/Cenmrev/V2RayX&quot;&gt;https://github.com/Cenmrev/V2RayX&lt;/a&gt;&lt;br /&gt;
+考虑到部分电脑软件只支持http协议，本地监测的端口有socks和http这俩。&lt;br /&gt;
+127.0.1.1+1081是socks。&lt;br /&gt;
+127.0.2.1+1082是http。&lt;/p&gt;
+
+&lt;p&gt;2.&amp;gt; 客户端配置
+服务器信息可以使用v2ray info命令行查看&lt;br /&gt;
+&lt;img src=&quot;/images/posts/v2ray/9.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+打开Windos客户端,我用的是V2RayN
+&lt;img src=&quot;/images/posts/v2ray/10.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+点击服务器添加VMESS服务器，然后填上服务器端信息
+&lt;img src=&quot;/images/posts/v2ray/11.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+然后填上服务器端信息，点击确定&lt;br /&gt;
+&lt;img src=&quot;/images/posts/v2ray/12.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;3.&amp;gt; 手机客户端配置&lt;br /&gt;
+我用的 v2rayNG 直接扫描生成的二维码就好了。
+&lt;img src=&quot;/images/posts/v2ray/14.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;问题点&quot;&gt;问题点&lt;/h3&gt;
+&lt;p&gt;1.&amp;gt; 安装完成后还是无法访问google&lt;br /&gt;
+右键点击v2rayN查看系统代理，选择自动配置系统代理
+&lt;img src=&quot;/images/posts/v2ray/13.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 07 Sep 2021 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2021/09/%E8%BD%BB%E6%9D%BE%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AEV2Ray/</link>
+        <guid isPermaLink="true">http://localhost:4000/2021/09/%E8%BD%BB%E6%9D%BE%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AEV2Ray/</guid>
+        
+        <category>科学上网</category>
+        
+        
+      </item>
     
       <item>
         <title>jekyll无法本地预览中文文件的问题</title>
@@ -323,6 +426,11 @@ gem install bundler jekyll 安装jekyll，这个安装过程有点慢，请耐�
         <description>&lt;ul&gt;
   &lt;li&gt;Shadowsocks，比较常用的工具，有Window、MAC、Linux、Android可以使用，并且可以自己配置VPS.&lt;/li&gt;
   &lt;li&gt;SetupVPN ,免费的VPN，提供Chrome插件，Window、MAC、Linux、Android各版本的下载&lt;/li&gt;
+  &lt;li&gt;V2Ray ,是Project V下的一个工具，Project V 是一个包含一系列构建特定网络环境工具的项目，而 V2Ray 属于最核心的一个&lt;br /&gt;
+V2Ray 用户手册：&lt;a href=&quot;https://www.v2ray.com&quot;&gt;https://www.v2ray.com&lt;/a&gt;（地址1）
+&lt;a href=&quot;https://v2ray.cool&quot;&gt;https://v2ray.cool&lt;/a&gt;(地址2)&lt;br /&gt;
+V2Ray 项目地址：&lt;a href=&quot;https://github.com/v2ray/v2ray-core&quot;&gt;https://github.com/v2ray/v2ray-core&lt;/a&gt;&lt;br /&gt;
+V2Ray Telegram 使用群链接：&lt;a href=&quot;https://t.me/projectv2ray&quot;&gt;https://t.me/projectv2ray&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </description>
@@ -772,221 +880,6 @@ Configuration file: /Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpa
         <pubDate>Wed, 26 Aug 2020 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2020/08/jekyll_tutorials1/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/08/jekyll_tutorials1/</guid>
-        
-        <category>个人博客搭建</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>HEXO搭建个人博客</title>
-        <description>&lt;p&gt;　　经过各种找资料，踩过各种坑，终于使用 hexo 搭建个人博客初步完成了，域名目前用得时 github 的，我的 hexo 是 3.1.1 版本，hexo 不同的版本，很多配置都不一样。好吧，废话不多说了，开始吧。&lt;/p&gt;
-
-&lt;p&gt;　　本篇文章累计了大量评论，和我的一些解答，读者有什么问题可以先看看评论，或者搜下关键字，如果还是有问题可以给我在评论里给我留言，问题很着急的可以加我 ＱＱ：1499065178　，或者给我发邮件：&lt;a href=&quot;mailto:leopardpan@icloud.com&quot;&gt;leopardpan@icloud.com&lt;/a&gt;  ，都可以，如果你已经搭建完成了，可以看看我的另一篇博客&lt;a href=&quot;http://baixin.io/2016/06/HEXO_Advanced/&quot;&gt;HEXO进阶&lt;/a&gt;，有讲如何能百度搜索你的博客、多台电脑使用HEXO发布博客等。我现在的博客是使用 Jekyll 搭建的，如果你想使用我现在的模板请看&lt;a href=&quot;http://baixin.io/2016/10/jekyll_tutorials1/&quot;&gt;Jekyll搭建个人博客&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;正文&quot;&gt;正文：&lt;/h2&gt;
-&lt;p&gt;　这边教程是针对与Mac的，&lt;a href=&quot;http://ibruce.info/2013/11/22/hexo-your-blog/?utm_source=tuicool&quot;&gt;参考链接&lt;/a&gt;，由于原文讲到的hexo是以前的老版本，所以现在的版本配置的时候会有些改动。&lt;/p&gt;
-
-&lt;p&gt;　之前是想着写博客，一方面是给自己做笔记，可以提升自己的写作、总结能力，一个技术点我们会使用，并不难，但是要做到让让别人也能听懂我们讲得，还是需要一定的技巧和经验的。很多类似于CSDN、博客园也都可以写文章，但是页面的样式我，不是太喜欢，简书还算好点得。最近看到一些大神们的博客（在我的友情链接里有），貌似都是用hexo写得，我也依葫芦画瓢的搭建了一个。不罗嗦了，直接上搭建步骤。&lt;/p&gt;
-
-&lt;h2 id=&quot;配置环境&quot;&gt;配置环境&lt;/h2&gt;
-
-&lt;h3 id=&quot;安装node必须&quot;&gt;安装Node（必须）&lt;/h3&gt;
-
-&lt;p&gt;作用：用来生成静态页面的
-到Node.js&lt;a href=&quot;https://nodejs.org/&quot;&gt;官网&lt;/a&gt;下载相应平台的最新版本，一路安装即可。&lt;/p&gt;
-
-&lt;h3 id=&quot;安装git必须&quot;&gt;安装Git（必须）&lt;/h3&gt;
-&lt;p&gt;作用：把本地的hexo内容提交到github上去.
-安装Xcode就自带有Git，我就不多说了。&lt;/p&gt;
-
-&lt;h3 id=&quot;申请github必须&quot;&gt;申请GitHub（必须）&lt;/h3&gt;
-&lt;p&gt;作用：是用来做博客的远程创库、域名、服务器之类的，怎么与本地hexo建立连接等下讲。
-&lt;a href=&quot;https://github.com/&quot;&gt;github&lt;/a&gt;账号我也不再啰嗦了,没有的话直接申请就行了，跟一般的注册账号差不多，SSH Keys，看你自己了，可以不配制，不配置的话以后每次对自己的博客有改动提交的时候就要手动输入账号密码，配置了就不需要了，怎么配置我就不多说了，网上有很多教程。&lt;/p&gt;
-
-&lt;h3 id=&quot;正式安装hexo&quot;&gt;正式安装HEXO　&lt;/h3&gt;
-&lt;p&gt;Node和Git都安装好后，可执行如下命令安装hexo：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo npm install -g hexo
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;初始化&quot;&gt;初始化&lt;/h3&gt;
-&lt;p&gt;创建一个文件夹，如：Blog，cd到Blog里执行hexo init的。命令：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hexo init
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;好啦，至此，全部安装工作已经完成！&lt;/p&gt;
-
-&lt;h3 id=&quot;生成静态页面&quot;&gt;生成静态页面&lt;/h3&gt;
-&lt;p&gt;继续再Blog目录下执行如下命令，生成静态页面&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hexo generate （hexo g  也可以）   
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;本地启动&quot;&gt;本地启动&lt;/h3&gt;
-&lt;p&gt;启动本地服务，进行文章预览调试，命令：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hexo server   
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;浏览器输入&lt;a href=&quot;就可以看到最原始的效果了&quot;&gt;http://localhost:4000&lt;/a&gt;
-我不知道你们能不能，反正我不能，因为我还有环境没配置好&lt;/p&gt;
-
-&lt;h3 id=&quot;常见的hexo配置错误&quot;&gt;常见的HEXO配置错误：&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ERROR Plugin load failed: hexo-server
-
-原因： Besides, utilities are separated into a standalone module. hexo.util is not reachable anymore.
-
-解决方法，执行命令：$ sudo npm install hexo-server
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;执行命令hexo server，提示：Usage: hexo&amp;lt;Command&amp;gt; ....
-
-原因：我认为是没有生成本地服务
-
-解决方法，执行命令：$ npm install hexo-server --save
-
-提示：hexo-server@0.1.2 node_modules/hexo-server
-.... 
-
-表示成功了[参考](https://hexo.io/zh-cn/docs/server.html)
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这个时候再执行：$ hexo-server&lt;/p&gt;
-
-&lt;p&gt;得到: INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.&lt;/p&gt;
-
-&lt;p&gt;这个时候再点击&lt;a href=&quot;http://0.0.0.0:4000&quot;&gt;http://0.0.0.0:4000&lt;/a&gt;，正常情况下应该是最原始的画面，但是我看到的是：
-白板和Cannot GET /   几个字
-原因： 由于2.6以后就更新了，我们需要手动配置些东西，我们需要输入下面三行命令：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install hexo-renderer-ejs --save
-npm install hexo-renderer-stylus --save
-npm install hexo-renderer-marked --save
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这个时候再重新生成静态文件，命令：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hexo generate （或hexo g）
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;启动本地服务器：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hexo server （或hexo s）
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;再点击网址&lt;a href=&quot;http://0.0.0.0:4000&quot;&gt;http://0.0.0.0:4000&lt;/a&gt; OK终于可以看到属于你自己的blog啦，?，虽然很简陋，但好歹有了一个属于自己的小窝了。&lt;a href=&quot;https://disqus.com/home/discussion/bsspirit/hexogithubweb/&quot;&gt;参考链接&lt;/a&gt;，本地已经简单的设置好了，但是现在域名和服务器都是基于自己的电脑，接下来需要跟github进行关联。&lt;/p&gt;
-
-&lt;h2 id=&quot;配置github&quot;&gt;配置Github&lt;/h2&gt;
-
-&lt;h3 id=&quot;建立repository&quot;&gt;建立Repository&lt;/h3&gt;
-
-&lt;p&gt;建立与你用户名对应的仓库，仓库名必须为【your_user_name.github.io】，固定写法
-然后建立关联，我的Blog在本地/Users/leopard/Blog，Blog是我之前建的东西也全在这里面，有：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Blog      &lt;br /&gt;
-　｜      &lt;br /&gt;
-　｜－－ _config.yml     &lt;br /&gt;
-　｜－－ node_modules    &lt;br /&gt;
-　｜－－ public              &lt;br /&gt;
-　｜－－ source                                                &lt;br /&gt;
-　｜－－ db.json	        &lt;br /&gt;
-　｜－－ package.json        &lt;br /&gt;
-　｜－－ scaffolds        &lt;br /&gt;
-　｜－－ themes          　　　　　
-　　　&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;现在我们需要_config.yml文件，来建立关联，命令：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vim _config.yml
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;翻到最下面，改成我这样子的，注意： &lt;code class=&quot;highlighter-rouge&quot;&gt;: 后面要有空格&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;deploy:
-  type: git
-  repository: https://github.com/leopardpan/leopardpan.github.io.git
-  branch: master
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;执行如下命令才能使用git部署&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install hexo-deployer-git --save
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;网上会有很多说法，有的type是github, 还有repository 最后面的后缀也不一样，是github.com.git，我也踩了很多坑，我现在的版本是hexo: 3.1.1，执行命令hexo -vsersion就出来了,貌似3.0后全部改成我上面这种格式了。
-忘了说了，我没用SSH Keys如果你用了SSH Keys的话直接在github里复制SSH的就行了，总共就两种协议，相信你懂的。
-然后，执行配置命令：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hexo deploy
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;　然后再浏览器中输入&lt;a href=&quot;http://leopardpan.github.io/&quot;&gt;http://leopardpan.github.io/&lt;/a&gt;就行了，我的 github 的账户叫 leopardpan ,把这个改成你 github 的账户名就行了&lt;/p&gt;
-
-&lt;h3 id=&quot;部署步骤&quot;&gt;部署步骤&lt;/h3&gt;
-
-&lt;p&gt;每次部署的步骤，可按以下三步来进行。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hexo clean
-hexo generate
-hexo deploy
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;一些常用命令：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hexo new &quot;postName&quot; #新建文章
-hexo new page &quot;pageName&quot; #新建页面
-hexo generate #生成静态页面至public目录
-hexo server #开启预览访问端口（默认端口4000，'ctrl + c'关闭server）
-hexo deploy #将.deploy目录部署到GitHub
-hexo help  #查看帮助
-hexo version  #查看Hexo的版本
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这里有大量的&lt;a href=&quot;https://github.com/hexojs/hexo/wiki/Themes&quot;&gt;主题列表&lt;/a&gt;使用方法里面
-都有详细的介绍，我就不多说了。    &lt;br /&gt;
-我这里有几款个人认为不错的主题，免去你们，一个一个的选了，欢迎吐槽我的审美，?       &lt;br /&gt;
-　&lt;a href=&quot;https://github.com/daisygao/hexo-themes-cover&quot;&gt;Cover&lt;/a&gt; - A chic theme with facebook-like cover photo    &lt;br /&gt;
-　&lt;a href=&quot;https://github.com/henryhuang/oishi&quot;&gt;Oishi&lt;/a&gt; - A white theme based on Landscape plus and Writing.    &lt;br /&gt;
-　&lt;a href=&quot;https://github.com/hardywu/hexo-theme-sidebar&quot;&gt;Sidebar&lt;/a&gt; - Another theme based on Light with a simple sidebar  &lt;br /&gt;
-　&lt;a href=&quot;https://github.com/SuperKieran/TKL&quot;&gt;TKL&lt;/a&gt; - A responsive design theme for Hexo. 一个设计优雅的响应式主题  &lt;br /&gt;
-　&lt;a href=&quot;https://github.com/levonlin/Tinnypp&quot;&gt;Tinnypp&lt;/a&gt; - A clean, simple theme based on Tinny   &lt;br /&gt;
-　&lt;a href=&quot;https://github.com/yunlzheng/hexo-themes-writing&quot;&gt;Writing&lt;/a&gt; - A small and simple hexo theme based on Light   &lt;br /&gt;
-　&lt;a href=&quot;https://github.com/litten/hexo-theme-yilia&quot;&gt;Yilia&lt;/a&gt; - Responsive and simple style 优雅简洁响应式主题，我用得就是这个。  &lt;br /&gt;
-　&lt;a href=&quot;https://github.com/Voidly/pacman&quot;&gt;Pacman voidy&lt;/a&gt; - A theme with dynamic tagcloud and dynamic snow&lt;/p&gt;
-
-&lt;h3 id=&quot;一些基本路径&quot;&gt;一些基本路径&lt;/h3&gt;
-&lt;p&gt;　文章在 source/_posts，编辑器可以用 Sublime，支持 markdown 语法。如果想修改头像可以直接在主题的 _config.yml 文件里面修改，友情链接，之类的都在这里，修改名字在 public/index.html 里修改，开始打理你的博客吧，有什么问题或者建议，都可以提出来，我会继续完善的。&lt;/p&gt;
-
-&lt;p&gt;Markdown语法参考链接: &lt;a href=&quot;https://www.zybuluo.com/mdeditor&quot;&gt;作业部落&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;qa&quot;&gt;Q&amp;amp;A&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;问：如何让文章想只显示一部分和一个 &lt;code class=&quot;highlighter-rouge&quot;&gt;阅读全文&lt;/code&gt; 的按钮？     &lt;br /&gt;
-答：在文章中加一个 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; ， &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;!--more--&amp;gt;&lt;/code&gt; 后面的内容就不会显示出来了。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt; &lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;问：本地部署成功了，也能预览效果，但使用 username.github.io 访问，&lt;code class=&quot;highlighter-rouge&quot;&gt;出现 404 &lt;/code&gt; .    &lt;br /&gt;
-答：首先确认 hexo d 命令执行是否报错，如果没有报错，再查看一下你的 github 的 username.github.io 仓库，你的博客是否已经成功提交了，你的 github 邮箱也要通过验证才行。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt; &lt;/p&gt;
-
-&lt;p&gt;转载请注明原地址，潘柏信的博客：&lt;a href=&quot;http://leopardpan.github.io&quot;&gt;http://leopardpan.github.io&lt;/a&gt; 谢谢！&lt;/p&gt;
-</description>
-        <pubDate>Tue, 25 Aug 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2020/08/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/08/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
         
         <category>个人博客搭建</category>
         

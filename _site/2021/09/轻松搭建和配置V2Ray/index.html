@@ -5,17 +5,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>零距离</title>
-  <meta name="description" content="欢迎来到我的个人站~">
+  <title>轻松搭建和配置V2Ray</title>
+  <meta name="description" content="服务器端的安装，配置1.&gt;  系统要求  Debian 9（推荐）  Ubuntu 14  Ubuntu 16  CentOS 7">
   <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="零距离">
-  <meta name="twitter:description" content="欢迎来到我的个人站~">
+  <meta name="twitter:title" content="轻松搭建和配置V2Ray">
+  <meta name="twitter:description" content="服务器端的安装，配置1.&gt;  系统要求  Debian 9（推荐）  Ubuntu 14  Ubuntu 16  CentOS 7">
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="零距离">
-  <meta property="og:description" content="欢迎来到我的个人站~">
+  <meta property="og:title" content="轻松搭建和配置V2Ray">
+  <meta property="og:description" content="服务器端的安装，配置1.&gt;  系统要求  Debian 9（推荐）  Ubuntu 14  Ubuntu 16  CentOS 7">
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
   
   <link rel="icon" type="image/png" href="/images/favicon.png" />
@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"  />
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css" />
-  <link rel="canonical" href="http://localhost:4000/tags/">
+  <link rel="canonical" href="http://localhost:4000/2021/09/%E8%BD%BB%E6%9D%BE%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AEV2Ray/">
   <link rel="alternate" type="application/rss+xml" title="零距离" href="http://localhost:4000/feed.xml" />
   <link rel="stylesheet" href="/css/main.css" >
   
@@ -162,216 +162,202 @@
         <div class="content-wrapper__inner">
             <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
+    <h1 class="post-title">轻松搭建和配置V2Ray</h1>
     <div class="post-meta">
-      <time datetime="" itemprop="datePublished" class="post-meta__date date"></time>
-      <span class="post-meta__tags tags"></span>
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2021-09-07 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2021-09-07</time>  
+         
+      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+    </p>
     </div>
-    <h1 class="post-title"></h1>
   </header>
 
   <section class="post">
-    
-
-<ul class="tag_box inline">
-    
-  
-
-
-  
-     
-    	<li><a href="#工具-ref">工具 <span>3</span></a></li>
-     
-    	<li><a href="#个人博客搭建-ref">个人博客搭建 <span>5</span></a></li>
-     
-    	<li><a href="#Python-ref">Python <span>1</span></a></li>
-     
-    	<li><a href="#科学上网-ref">科学上网 <span>2</span></a></li>
-     
-    	<li><a href="#集群分布式-ref">集群分布式 <span>1</span></a></li>
-    
-  
-
-
-
+    <h3 id="服务器端的安装配置">服务器端的安装，配置</h3>
+<p>1.&gt;  系统要求</p>
+<ul>
+  <li>Debian 9（推荐）</li>
+  <li>Ubuntu 14</li>
+  <li>Ubuntu 16</li>
+  <li>CentOS 7</li>
 </ul>
 
-<div class = "card">
- 
+<p>其他Linux版本不建议，官方安装脚本自行搜索(较麻烦，所以我直接删除了)</p>
 
-  <h3 id="工具-ref">工具</h3>
+<p>2.&gt;  命令准备</p>
+<ul>
+  <li>vim：<br />
+输入vim回车提示：</li>
+</ul>
+
+<blockquote>
   <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2021/06/GitTutorial/">Git教程</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2020/11/markdownTool/">Markdown工具集</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2020/06/Develop_Tool/">开发常用工具</a></li>
-      	
-      
-    
-  
-
-
-
+    <li>-bash:vim:common not found “</li>
   </ul>
+</blockquote>
 
+<p>输入命令：yum -y install vim-enhanced，开始下载安装作为依赖其他也会被安装进来（如果没有安装其他文件，则单独再进行安装）。<br />
+安装完成后再次输入 vim 命令，有命令行的版本等信息显示，则安装成功。<br />
+输入:q 回车退出。</p>
 
- 
-
-  <h3 id="个人博客搭建-ref">个人博客搭建</h3>
+<p>3.&gt; 安装V2Ray服务端<br />
+<strong>推荐的一键安装脚本</strong></p>
+<blockquote>
   <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2021/08/jekyll%E6%97%A0%E6%B3%95%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E7%9A%84%E9%97%AE%E9%A2%98/">jekyll无法本地预览中文文件的问题</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2021/06/Jekyll%E7%9B%AE%E5%BD%95%E8%AE%B2%E8%A7%A3/">Jekyll目录</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2021/06/Windows%E5%AE%89%E8%A3%85Jekyll/">Windows安装Jekyll</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2020/08/jekyll_tutorials1/">Jekyll搭建个人博客</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2020/08/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">HEXO搭建个人博客</a></li>
-      	
-      
-    
-  
-
-
-
+    <li>sudo -i “</li>
+    <li>bash &lt;(curl -s -L https://git.io/v2ray.sh)”</li>
   </ul>
+</blockquote>
+
+<p>如下截图输入1安装，其他参数可以默认，只需要回车执行下一步（除非你有特别要求）   <img src="/images/posts/v2ray/1.png" /><br />
+安装完成后输入systemctl status v2ray.service命令查看状态。<br />
+<img src="/images/posts/v2ray/8.png" alt="" /></p>
+
+<p>4.&gt;配置及管理
+V2Ray 配置文件路径：/etc/v2ray/config.json<br />
+手动配置打开这个文件就好了，官方文档能看懂的就自己填。<br />
+快速管理命令：<br />
+v2ray info 查看 V2Ray 配置信息<br />
+v2ray config 修改 V2Ray 配置<br />
+v2ray link 生成 V2Ray 配置文件链接<br />
+v2ray infolink 生成 V2Ray 配置信息链接<br />
+v2ray qr 生成 V2Ray 配置二维码链接<br />
+v2ray ss 修改 Shadowsocks 配置<br />
+v2ray ssinfo 查看 Shadowsocks 配置信息<br />
+v2ray ssqr 生成 Shadowsocks 配置二维码链接<br />
+v2ray status 查看 V2Ray 运行状态<br />
+v2ray start 启动 V2Ray<br />
+v2ray stop 停止 V2Ray<br />
+v2ray restart 重启 V2Ray<br />
+v2ray log 查看 V2Ray 运行日志<br />
+v2ray update 更新 V2Ray<br />
+v2ray update.sh 更新 V2Ray 管理脚本<br />
+v2ray uninstall 卸载 V2Ray</p>
+
+<h3 id="客户端的安装配置">客户端的安装，配置</h3>
+<p>1.&gt; 软件下载
+V2RayW Win
+下载：<a href="https://github.com/Cenmrev/V2RayW">https://github.com/Cenmrev/V2RayW</a><br />
+V2RayN Win
+下载：<a href="https://github.com/2dust/v2rayN">https://github.com/2dust/v2rayN</a><br />
+V2RayX MAC
+下载：<a href="https://github.com/Cenmrev/V2RayX">https://github.com/Cenmrev/V2RayX</a><br />
+考虑到部分电脑软件只支持http协议，本地监测的端口有socks和http这俩。<br />
+127.0.1.1+1081是socks。<br />
+127.0.2.1+1082是http。</p>
+
+<p>2.&gt; 客户端配置
+服务器信息可以使用v2ray info命令行查看<br />
+<img src="/images/posts/v2ray/9.png" alt="" /><br />
+打开Windos客户端,我用的是V2RayN
+<img src="/images/posts/v2ray/10.png" alt="" /><br />
+点击服务器添加VMESS服务器，然后填上服务器端信息
+<img src="/images/posts/v2ray/11.png" alt="" /><br />
+然后填上服务器端信息，点击确定<br />
+<img src="/images/posts/v2ray/12.png" alt="" /></p>
+
+<p>3.&gt; 手机客户端配置<br />
+我用的 v2rayNG 直接扫描生成的二维码就好了。
+<img src="/images/posts/v2ray/14.png" alt="" /></p>
+<h3 id="问题点">问题点</h3>
+<p>1.&gt; 安装完成后还是无法访问google<br />
+右键点击v2rayN查看系统代理，选择自动配置系统代理
+<img src="/images/posts/v2ray/13.png" alt="" /></p>
 
 
- 
-
-  <h3 id="Python-ref">Python</h3>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2020/09/%E5%9B%BE%E6%96%87%E8%AE%B2%E8%A7%A3%E5%AE%89%E8%A3%85Python/">图文讲解安装Python</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
- 
-
-  <h3 id="科学上网-ref">科学上网</h3>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2021/09/%E8%BD%BB%E6%9D%BE%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AEV2Ray/">轻松搭建和配置V2Ray</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2021/02/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E6%96%B9%E6%A1%88/">科学上网方案</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
- 
-
-  <h3 id="集群分布式-ref">集群分布式</h3>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2021/07/%E9%9B%86%E7%BE%A4-%E5%88%86%E5%B8%83%E5%BC%8F-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%A6%82%E5%BF%B5/">集群、分布式、微服务概念和区别</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-</div>
 
   </section>
 </article>
+
+<section>
+
+            <div class="content-play">
+              
+              <a href="javascript:void(0)" onclick="ShareToggle()"   class="dashang" title="分 享">分 享</a>
+				  
+				  <a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="赞 助">赞 助</a>
+				  <div class="hide_box-play"></div>
+              <div class="shang_box-play">
+                <a class="shang_close-play" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="/images/payimg/close.jpg" alt="取消" /></a>
+                <div class="shang_tit-play">
+                  <p>感谢您的支持，我会继续努力的!</p>
+                </div>
+                <div class="shang_payimg">
+                    <img src="/images/payimg/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+                </div>
+              <div class="shang_payimg">    
+                    <img src="/images/payimg/weipayimg.jpg" alt="扫码支持" title="扫一扫" />
+                </div>
+                <div class="pay_explain">扫码打赏，你说多少就多少</div>
+                <div class="shang_payselect">
+                  <div class="pay_item checked" data-id="alipay">
+                    <span class="pay_logo"><img src="/images/payimg/alipay.jpg" alt="支付宝" /></span>
+                  </div>
+                  <div class="pay_item" data-id="weipay">
+                    <span class="pay_logo"><img src="/images/payimg/wechat.jpg" alt="微信" /></span>
+                  </div>
+                </div>
+                <div class="shang_info-play">
+                  <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+                </div>
+              </div>
+            </div>
+            <div class="share_box-play">
+					
+<!--<a href="http://v.t.sina.com.cn/share/share.php?url="+'/2021/09/%E8%BD%BB%E6%9D%BE%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AEV2Ray/' target="_blank">新浪微博</a>--> 
+<div class="share-dialog">
+<div class="share-close" onclick="ShareToggle()"></div>
+<div class="share-dialog-title">分享</div>
+<div class="share-dialog-cont">
+	<div class="share-platform">
+		<div class="share-platform-r">
+			<div class="bdsharebuttonbox">
+				<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+				<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+				<a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+				<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"分享到新浪微博","bdMini":"1","bdMiniList":["bdxc","tqf","douban","bdhome","sqq","thx","ibaidu","meilishuo","mogujie","diandian","huaban","duitang","hx","fx","youdao","sdo","qingbiji","people","xinhua","mail","isohu","yaolan","wealink","ty","iguba","fbook","twi","linkedin","h163","evernotecn","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!--<script>
+	var g_url = window.location.href;
+	$('.share-copy-c input').val(g_url);
+	var clip = new ZeroClipboard( document.getElementById("btnCopy"));
+</script>-->
+				</div>
+				<script type="text/javascript">
+            function dashangToggle(){
+              $(".hide_box-play").fadeToggle();
+              $(".shang_box-play").fadeToggle();
+            }
+				function ShareToggle(){
+					$(".hide_box-play").fadeToggle();
+					$(".share_box-play").fadeToggle();
+				}
+            </script>
+			
+       <ul class="pager">
+        
+        <li class="previous">
+            <a href="/2021/08/jekyll%E6%97%A0%E6%B3%95%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E7%9A%84%E9%97%AE%E9%A2%98/" data-toggle="tooltip" data-placement="top" title="jekyll无法本地预览中文文件的问题">上一篇：  <span>jekyll无法本地预览中文文件的问题</span>
+            </a>
+        </li>
+        
+        
+    </ul>
+</section>
+
+<section class="post-comments">
+
+
+  
+
+</section>
+
 
             <section class="footer">
     <footer>
