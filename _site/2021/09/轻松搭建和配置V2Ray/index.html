@@ -187,27 +187,20 @@
 <p>2.&gt;  命令准备</p>
 <ul>
   <li>vim：<br />
-输入vim回车提示：</li>
-</ul>
-
-<blockquote>
-  <ul>
-    <li>-bash:vim:common not found</li>
-  </ul>
-</blockquote>
-
-<p>输入命令：yum -y install vim-enhanced，开始下载安装作为依赖其他也会被安装进来（如果没有安装其他文件，则单独再进行安装）。<br />
+输入vim回车提示：
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash:vim:common not found
+</code></pre></div>    </div>
+    <p>输入命令：yum -y install vim-enhanced，开始下载安装作为依赖其他也会被安装进来（如果没有安装其他文件，则单独再进行安装）。<br />
 安装完成后再次输入 vim 命令，有命令行的版本等信息显示，则安装成功。<br />
 输入:q 回车退出。</p>
+  </li>
+</ul>
 
 <p>3.&gt; 安装V2Ray服务端<br />
 <strong>推荐的一键安装脚本</strong></p>
-<blockquote>
-  <ul>
-    <li>sudo -i</li>
-    <li>bash &lt;(curl -s -L https://git.io/v2ray.sh)</li>
-  </ul>
-</blockquote>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@vps19163870 ~]# <span class="nb">sudo</span> -i
+<span class="o">[</span>root@vps19163870 ~]# bash &lt;<span class="o">(</span><span class="nb">curl</span> -s -L https://git.io/v2ray.sh<span class="o">)</span>
+</code></pre></div></div>
 
 <p>如下截图输入1安装，其他参数可以默认，只需要回车执行下一步（除非你有特别要求） <br />
 <img src="/images/posts/v2ray/1.png" alt="" /><br />
@@ -363,6 +356,11 @@ v2ray默认配置文件在/etc/v2ray/config.json，我们只需编辑这个文�
             </a>
         </li>
         
+        
+        <li class="next">
+            <a href="/2021/09/%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AEShadowsocks/" data-toggle="tooltip" data-placement="top" title="搭建配置Shadowsocks">下一篇：  <span>搭建配置Shadowsocks</span>
+            </a>
+        </li>
         
     </ul>
 </section>

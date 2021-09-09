@@ -5,9 +5,114 @@
     <description>欢迎来到我的个人站~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 08 Sep 2021 17:39:55 +0800</pubDate>
-    <lastBuildDate>Wed, 08 Sep 2021 17:39:55 +0800</lastBuildDate>
+    <pubDate>Thu, 09 Sep 2021 22:20:28 +0800</pubDate>
+    <lastBuildDate>Thu, 09 Sep 2021 22:20:28 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>搭建配置Shadowsocks</title>
+        <description>&lt;h3 id=&quot;服务器端的安装配置&quot;&gt;服务器端的安装，配置&lt;/h3&gt;
+&lt;p&gt;1.&amp;gt;  系统要求&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;CentOS 7.*&lt;br /&gt;
+2.&amp;gt;  命令准备&lt;/li&gt;
+  &lt;li&gt;vim：&lt;br /&gt;
+输入vim回车提示：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;-bash:vim:common not found&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;输入命令：yum -y install vim-enhanced，开始下载安装作为依赖其他也会被安装进来（如果没有安装其他文件，则单独再进行安装）。&lt;br /&gt;
+安装完成后再次输入 vim 命令，有命令行的版本等信息显示，则安装成功。&lt;br /&gt;
+输入:q 回车退出。&lt;br /&gt;
+3.&amp;gt; 安装Shadowsocks，依次输入如下命令：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;[root@vps19163870 ~]# yum install -y epel-release&lt;br /&gt;
+[root@vps19163870 ~]# yum install -y python-pip&lt;br /&gt;
+[root@vps19163870 ~]# pip install shadowsocks&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;EPEL&lt;/em&gt;&lt;/strong&gt; 的全称叫 Extra Packages for Enterprise Linux。EPEL 是由 Fedora 社区打造，为 RHEL 及衍生发行版如 CentOS、Scientific Linux 等提供高质量软件包的项目。装上了 EPEL 之后，就相当于添加了一个第三方源 &lt;br /&gt;
+&lt;strong&gt;pip&lt;/strong&gt; 是 Python 的包管理工具，这里我们用 pip 安装 shadowsocks。&lt;br /&gt;
+Shadowsocks安装成功画面&lt;br /&gt;
+&lt;img src=&quot;/images/posts/Shadowsocks/2.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+4.&amp;gt; 配置Shadowsocks参数&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;[root@vps19163870 ~]# vim /etc/shadowsocks/shadowsocks.json&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;{&lt;br /&gt;
+  “server”:”113.124.107.176”,&lt;br /&gt;
+  “server_port”:443,&lt;br /&gt;
+  “local_address”: “127.0.0.1”,&lt;br /&gt;
+  “local_port”:1080,&lt;br /&gt;
+  “password”:”1234567890”,&lt;br /&gt;
+  “timeout”:300,&lt;br /&gt;
+  “method”:”aes-256-cfb”,&lt;br /&gt;
+  “fast_open”: false,&lt;br /&gt;
+  “workers”: 1&lt;br /&gt;
+}&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;其中参数解析如下：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;server：表示监听的地址，这里表示监听所有的地址；&lt;/li&gt;
+  &lt;li&gt;server_port： ss 服务器端口&lt;/li&gt;
+  &lt;li&gt;local_address：本地地址&lt;/li&gt;
+  &lt;li&gt;local_port：本地端口&lt;/li&gt;
+  &lt;li&gt;password：连接 ss 密码。&lt;/li&gt;
+  &lt;li&gt;timeout：超时时间600秒。&lt;/li&gt;
+  &lt;li&gt;method：通信加密方式。&lt;/li&gt;
+  &lt;li&gt;fast_open ：true或false。开启fast_open以降低延迟，但要求Linux内核在3.7+。&lt;/li&gt;
+  &lt;li&gt;workers：工作线程数  &lt;br /&gt;
+5.&amp;gt; 为了方便启动和关闭 这里设置成自启动&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;[root@vps19163870 ~]# vim /etc/systemd/system/shadowsocks.service&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;[Unit]&lt;br /&gt;
+Description=Shadowsocks&lt;br /&gt;
+[Service]&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;TimeoutStartSec=0&lt;br /&gt;
+ExecStart=/usr/bin/sslocal -c /etc/shadowsocks.json&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;[Install]&lt;br /&gt;
+WantedBy=multi-user.target&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;6.&amp;gt; 启动Shadowsocks服务&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;[root@vps19163870 ~]# systemctl enable shadowsocks.service&lt;br /&gt;
+[root@vps19163870 ~]# systemctl start shadowsocks.service&lt;br /&gt;
+[root@vps19163870 ~]# systemctl status shadowsocks.service&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;启动成功如下图
+&lt;img src=&quot;/images/posts/Shadowsocks/6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;至此Shadowsocks已经搭建完成，客户端只需要配置一下就可以了。&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 07 Sep 2021 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2021/09/%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AEShadowsocks/</link>
+        <guid isPermaLink="true">http://localhost:4000/2021/09/%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AEShadowsocks/</guid>
+        
+        <category>科学上网</category>
+        
+        
+      </item>
     
       <item>
         <title>轻松搭建和配置V2Ray</title>
@@ -25,27 +130,20 @@
 &lt;p&gt;2.&amp;gt;  命令准备&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;vim：&lt;br /&gt;
-输入vim回车提示：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;-bash:vim:common not found&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;输入命令：yum -y install vim-enhanced，开始下载安装作为依赖其他也会被安装进来（如果没有安装其他文件，则单独再进行安装）。&lt;br /&gt;
+输入vim回车提示：
+    &lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-bash:vim:common not found
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;输入命令：yum -y install vim-enhanced，开始下载安装作为依赖其他也会被安装进来（如果没有安装其他文件，则单独再进行安装）。&lt;br /&gt;
 安装完成后再次输入 vim 命令，有命令行的版本等信息显示，则安装成功。&lt;br /&gt;
 输入:q 回车退出。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;3.&amp;gt; 安装V2Ray服务端&lt;br /&gt;
 &lt;strong&gt;推荐的一键安装脚本&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;sudo -i&lt;/li&gt;
-    &lt;li&gt;bash &amp;lt;(curl -s -L https://git.io/v2ray.sh)&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
+&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;root@vps19163870 ~]# &lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; -i
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;root@vps19163870 ~]# bash &amp;lt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;curl&lt;/span&gt; -s -L https://git.io/v2ray.sh&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;如下截图输入1安装，其他参数可以默认，只需要回车执行下一步（除非你有特别要求） &lt;br /&gt;
 &lt;img src=&quot;/images/posts/v2ray/1.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
@@ -607,278 +705,6 @@ Customize Installation：可选安装路径、可选是否应用到所有用户�
         <guid isPermaLink="true">http://localhost:4000/2020/09/%E5%9B%BE%E6%96%87%E8%AE%B2%E8%A7%A3%E5%AE%89%E8%A3%85Python/</guid>
         
         <category>Python</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Jekyll搭建个人博客</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#介绍&quot; id=&quot;markdown-toc-介绍&quot;&gt;介绍&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#jekyll-环境配置&quot; id=&quot;markdown-toc-jekyll-环境配置&quot;&gt;Jekyll 环境配置&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#目录结构&quot; id=&quot;markdown-toc-目录结构&quot;&gt;目录结构&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#博客部署到远端&quot; id=&quot;markdown-toc-博客部署到远端&quot;&gt;博客部署到远端&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#编写文章&quot; id=&quot;markdown-toc-编写文章&quot;&gt;编写文章&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#使用我的博客模板&quot; id=&quot;markdown-toc-使用我的博客模板&quot;&gt;使用我的博客模板&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#如果你本机没配置过任何jekyll的环境可能会报错&quot; id=&quot;markdown-toc-如果你本机没配置过任何jekyll的环境可能会报错&quot;&gt;如果你本机没配置过任何jekyll的环境，可能会报错&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#修改成你自己的博客&quot; id=&quot;markdown-toc-修改成你自己的博客&quot;&gt;修改成你自己的博客&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#qa&quot; id=&quot;markdown-toc-qa&quot;&gt;Q&amp;amp;A&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;介绍&quot;&gt;介绍&lt;/h3&gt;
-
-&lt;p&gt;　Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个模版目录，其中包含原始文本格式的文档，通过 Markdown （或者 Textile） 以及 Liquid 转化成一个完整的可发布的静态网站，你可以发布在任何你喜爱的服务器上。Jekyll 也可以运行在 GitHub Page 上，也就是说，你可以使用 GitHub 的服务来搭建你的项目页面、博客或者网站，而且是完全免费的&lt;/p&gt;
-
-&lt;p&gt;　使用 Jekyll 搭建博客之前要确认下本机环境，Git 环境（用于部署到远端）、&lt;a href=&quot;http://www.ruby-lang.org/en/downloads/&quot;&gt;Ruby&lt;/a&gt; 环境（Jekyll 是基于 Ruby 开发的）、包管理器 &lt;a href=&quot;http://rubygems.org/pages/download&quot;&gt;RubyGems&lt;/a&gt;              &lt;br /&gt;
-　　如果你是 Mac 用户，你就需要安装 Xcode 和 Command-Line Tools了。下载方式 Preferences → Downloads → Components。&lt;/p&gt;
-
-&lt;p&gt;　　Jekyll 是一个免费的简单静态网页生成工具，可以配合第三方服务例如： Disqus（评论）、多说(评论) 以及分享 等等扩展功能，Jekyll 可以直接部署在 Github（国外） 或 Coding（国内） 上，可以绑定自己的域名。&lt;a href=&quot;http://jekyll.bootcss.com/&quot;&gt;Jekyll中文文档&lt;/a&gt;、&lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll英文文档&lt;/a&gt;、&lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;Jekyll主题列表&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h3 id=&quot;jekyll-环境配置&quot;&gt;Jekyll 环境配置&lt;/h3&gt;
-
-&lt;p&gt;安装 jekyll&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gem install jekyll     
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;创建博客&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ jekyll new myBlog    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;进入博客目录&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ cd myBlog  
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;启动本地服务&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ jekyll serve
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;在浏览器里输入： &lt;a href=&quot;http://localhost:4000&quot;&gt;http://localhost:4000&lt;/a&gt;，就可以看到你的博客效果了。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/posts/jekyll/image1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;so easy !&lt;/p&gt;
-
-&lt;h3 id=&quot;目录结构&quot;&gt;目录结构&lt;/h3&gt;
-&lt;p&gt;　
-　Jekyll 的核心其实是一个文本转换引擎。它的概念其实就是： 你用你最喜欢的标记语言来写文章，可以是 Markdown，也可以是 Textile,或者就是简单的 HTML, 然后 Jekyll 就会帮你套入一个或一系列的布局中。在整个过程中你可以设置URL路径, 你的文本在布局中的显示样式等等。这些都可以通过纯文本编辑来实现，最终生成的静态页面就是你的成品了。&lt;/p&gt;
-
-&lt;p&gt;一个基本的 Jekyll 网站的目录结构一般是像这样的：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.
-├── _config.yml
-├── _includes
-|   ├── footer.html
-|   └── header.html
-├── _layouts
-|   ├── default.html
-|   ├── post.html
-|   └── page.html
-├── _posts
-|   └── 2016-10-08-welcome-to-jekyll.markdown
-├── _sass
-|   ├── _base.scss
-|   ├── _layout.scss
-|   └── _syntax-highlighting.scss
-├── about.md
-├── css
-|   └── main.scss
-├── feed.xml
-└── index.html
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这些目录结构以及具体的作用可以参考 &lt;a href=&quot;http://jekyll.com.cn/docs/structure/&quot;&gt;官网文档&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;进入 _config.yml 里面，修改成你想看到的信息，重新 jekyll server ，刷新浏览器就可以看到你刚刚修改的信息了。&lt;/p&gt;
-
-&lt;p&gt;到此，博客初步搭建算是完成了，&lt;/p&gt;
-
-&lt;h3 id=&quot;博客部署到远端&quot;&gt;博客部署到远端&lt;/h3&gt;
-
-&lt;p&gt;　我这里讲的是部署到 Github Page 创建一个 github 账号，然后创建一个跟你账户名一样的仓库，如我的 github 账户名叫 &lt;a href=&quot;https://github.com/leopardpan&quot;&gt;leopardpan&lt;/a&gt;，我的 github 仓库名就叫 &lt;a href=&quot;https://github.com/leopardpan/leopardpan.github.io&quot;&gt;leopardpan.github.io&lt;/a&gt;，创建好了之后，把刚才建立的 myBlog 项目 push 到 username.github.io仓库里去（username指的是你的github用户名），检查你远端仓库已经跟你本地 myBlog 同步了，然后你在浏览器里输入 username.github.io ，就可以访问你的博客了。&lt;/p&gt;
-
-&lt;h3 id=&quot;编写文章&quot;&gt;编写文章&lt;/h3&gt;
-
-&lt;p&gt;　　所有的文章都是 _posts 目录下面，文章格式为 mardown 格式，文章文件名可以是 .mardown 或者 .md。&lt;/p&gt;
-
-&lt;p&gt;　　编写一篇新文章很简单，你可以直接从 _posts/ 目录下复制一份出来 &lt;code class=&quot;highlighter-rouge&quot;&gt;2016-10-16-welcome-to-jekyll副本.markdown&lt;/code&gt; ，修改名字为 2016-10-16-article1.markdown ，注意：文章名的格式前面必须为 2016-10-16- ，日期可以修改，但必须为 年-月-日- 格式，后面的 article1 是整个文章的连接 URL，如果文章名为中文，那么文章的连接URL就会变成这样的：http://baixin.io/2015/08/%E6%90%AD%E5/ ， 所以建议文章名最好是英文的或者阿拉伯数字。 双击 2016-10-16-article1.markdown 打开&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
----
-layout: post
-title:  &quot;Welcome to Jekyll!&quot;
-date:   2016-10-16 11:29:08 +0800
-categories: jekyll update
----
-
-正文...
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;title: 显示的文章名， 如：title: 我的第一篇文章                  &lt;br /&gt;
-date:  显示的文章发布日期，如：date: 2016-10-16                        &lt;br /&gt;
-categories: tag标签的分类，如：categories: 随笔&lt;/p&gt;
-
-&lt;p&gt;注意：文章头部格式必须为上面的，…. 就是文章的正文内容。&lt;/p&gt;
-
-&lt;p&gt;我写文章使用的是 Sublime Text2 编辑器，如果你对 markdown 语法不熟悉的话，可以看看&lt;a href=&quot;https://www.zybuluo.com/&quot;&gt;作业部落的教程&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;使用我的博客模板&quot;&gt;使用我的博客模板&lt;/h3&gt;
-
-&lt;p&gt;虽然博客部署完成了，你会发现博客太简单不是你想要的，如果你喜欢我的模板的话，可以使用我的模板。&lt;/p&gt;
-
-&lt;p&gt;首先你要获取的我博客，&lt;a href=&quot;https://github.com/leopardpan/leopardpan.github.io.git&quot;&gt;Github项目地址&lt;/a&gt;，你可以直接&lt;a href=&quot;https://github.com/leopardpan/leopardpan.github.io/archive/master.zip&quot;&gt;点击下载博客&lt;/a&gt;，进去leopardpan.github.io/ 目录下， 使用命令部署本地服务&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ jekyll server   
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;如果你本机没配置过任何jekyll的环境可能会报错&quot;&gt;如果你本机没配置过任何jekyll的环境，可能会报错&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/Users/xxxxxxxx/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require': cannot load such file -- bundler (LoadError)
-	from /Users/xxxxxxxx/.rvm/rubies/ruby-2.2.2/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
-	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/gems/jekyll-3.3.0/lib/jekyll/plugin_manager.rb:34:in `require_from_bundler'
-	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/gems/jekyll-3.3.0/exe/jekyll:9:in `&amp;lt;top (required)&amp;gt;'
-	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/jekyll:23:in `load'
-	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/jekyll:23:in `&amp;lt;main&amp;gt;'
-	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in `eval'
-	from /Users/xxxxxxxx/.rvm/gems/ruby-2.2.2/bin/ruby_executable_hooks:15:in `&amp;lt;main&amp;gt;'
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;原因： 没有安装 bundler ，执行安装 bundler 命令&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-$ gem install bundler
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;提示：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Fetching: bundler-1.13.5.gem (100%)
-Successfully installed bundler-1.13.5
-Parsing documentation for bundler-1.13.5
-Installing ri documentation for bundler-1.13.5
-Done installing documentation for bundler after 5 seconds
-1 gem installed
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;再次执行 $ jekyll server  ，提示&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-Could not find proper version of jekyll (3.1.1) in any of the sources
-Run `bundle install` to install missing gems.
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;跟着提示运行命令&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ bundle install
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这个时候你可能会发现 bundle install 运行卡主不动了。&lt;/p&gt;
-
-&lt;p&gt;如果很长时间都没任何提示的话，你可以尝试修改 gem 的 source&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gem sources --remove https://rubygems.org/
-$ gem sources -a http://ruby.taobao.org/
-$ gem sources -l
-*** CURRENT SOURCES ***
-
-http://ruby.taobao.org
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;再次执行命令 $ bundle install，发现开始有动静了&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Fetching gem metadata from https://rubygems.org/...........
-Fetching version metadata from https://rubygems.org/..
-Fetching dependency metadata from https://rubygems.org/.
-。。。
-Installing jekyll-watch 1.3.1
-Installing jekyll 3.1.1
-Bundle complete! 3 Gemfile dependencies, 17 gems now installed.
-Use `bundle show [gemname]` to see where a bundled gem is installed.
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;bundler安装完成，后再次启动本地服务&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ jekyll server
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;继续报错&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Configuration file: /Users/tendcloud-Caroline/Desktop/leopardpan.github.io/_config.yml
-  Dependency Error: Yikes! It looks like you don't have jekyll-sitemap or one of its dependencies installed. In order to use Jekyll as currently configured, you'll need to install this gem. The full error message from Ruby is: 'cannot load such file -- jekyll-sitemap' If you run into trouble, you can find helpful resources at http://jekyllrb.com/help/! 
-jekyll 3.1.1 | Error:  jekyll-sitemap
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;表示 当前的 jekyll 版本是 3.1.1 ，无法使用 jekyll-sitemap&lt;/p&gt;
-
-&lt;p&gt;解决方法有两个&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;1、打开当前目录下的 _config.yml 文件，把 gems: [jekyll-paginate,jekyll-sitemap] 换成 gems: [jekyll-paginate] ，也就是去掉jekyll-sitemap。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;2、升级 jekyll 版本，我当前的是 jekyll 3.1.2 。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;修改完成后保存配置，再次执行&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ jekyll server
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;提示&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Configuration file: /Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpan.github.io-github/_config.yml
-            Source: /Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpan.github.io-github
-       Destination: /Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpan.github.io-github/_site
- Incremental build: disabled. Enable with --incremental
-      Generating... 
-                    done in 0.901 seconds.
- Auto-regeneration: enabled for '/Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpan.github.io-github'
-Configuration file: /Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpan.github.io-github/_config.yml
-    Server address: http://127.0.0.1:4000/
-  Server running... press ctrl-c to stop.
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;表示本地服务部署成功。&lt;/p&gt;
-
-&lt;p&gt;在浏览器输入 &lt;a href=&quot;127.0.0.1:4000&quot;&gt;127.0.0.1:4000&lt;/a&gt; ， 就可以看到&lt;a href=&quot;http://baixin.io&quot;&gt;baixin.io&lt;/a&gt;博客效果了。&lt;/p&gt;
-
-&lt;h3 id=&quot;修改成你自己的博客&quot;&gt;修改成你自己的博客&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;如果你想使用我的模板请把 _posts/ 目录下的文章都去掉。&lt;/li&gt;
-    &lt;li&gt;修改 _config.yml 文件里面的内容为你自己的。&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;然后使用 git push 到你自己的仓库里面去，检查你远端仓库，在浏览器输入 username.github.io 就会发现，你有一个漂亮的主题模板了。&lt;/p&gt;
-
-&lt;h3 id=&quot;qa&quot;&gt;Q&amp;amp;A&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;问题：最近很多朋友使用我的模板报警告：The CNAME &lt;code class=&quot;highlighter-rouge&quot;&gt;baixin.io&lt;/code&gt; is already taken 
-解决：把CNAME里面的baixin.io修改成你自己的域名，如果你暂时没有域名，CNAME里面就什么都不用谢。（之前没人反馈过这个问题，应该是github page最近才最的限制。）&lt;/p&gt;
-&lt;/blockquote&gt;
-
-</description>
-        <pubDate>Wed, 26 Aug 2020 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2020/08/jekyll_tutorials1/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/08/jekyll_tutorials1/</guid>
-        
-        <category>个人博客搭建</category>
         
         
       </item>
