@@ -5,8 +5,8 @@
     <description>欢迎来到我的个人站~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 09 Sep 2021 22:20:28 +0800</pubDate>
-    <lastBuildDate>Thu, 09 Sep 2021 22:20:28 +0800</lastBuildDate>
+    <pubDate>Sat, 24 Dec 2022 17:20:47 +0800</pubDate>
+    <lastBuildDate>Sat, 24 Dec 2022 17:20:47 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -14,8 +14,11 @@
         <description>&lt;h3 id=&quot;服务器端的安装配置&quot;&gt;服务器端的安装，配置&lt;/h3&gt;
 &lt;p&gt;1.&amp;gt;  系统要求&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;CentOS 7.*&lt;br /&gt;
-2.&amp;gt;  命令准备&lt;/li&gt;
+  &lt;li&gt;CentOS 7.*&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;2.&amp;gt;  命令准备&lt;/p&gt;
+&lt;ul&gt;
   &lt;li&gt;vim：&lt;br /&gt;
 输入vim回车提示：&lt;/li&gt;
 &lt;/ul&gt;
@@ -39,14 +42,15 @@
 &lt;strong&gt;pip&lt;/strong&gt; 是 Python 的包管理工具，这里我们用 pip 安装 shadowsocks。&lt;br /&gt;
 Shadowsocks安装成功画面&lt;br /&gt;
 &lt;img src=&quot;/images/posts/Shadowsocks/2.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
-4.&amp;gt; 配置Shadowsocks参数&lt;/p&gt;
+4.&amp;gt; 配置Shadowsocks参数&lt;br /&gt;
+输入命令：vim /etc/shadowsocks.json&lt;/p&gt;
 &lt;blockquote&gt;
-  &lt;p&gt;[root@vps19163870 ~]# vim /etc/shadowsocks/shadowsocks.json&lt;/p&gt;
+  &lt;p&gt;[root@vps19163870 ~]# vim /etc/shadowsocks.json&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;{&lt;br /&gt;
-  “server”:”113.124.107.176”,&lt;br /&gt;
+  “server”:”0.0.0.0”,&lt;br /&gt;
   “server_port”:443,&lt;br /&gt;
   “local_address”: “127.0.0.1”,&lt;br /&gt;
   “local_port”:1080,&lt;br /&gt;
@@ -61,16 +65,17 @@ Shadowsocks安装成功画面&lt;br /&gt;
 &lt;p&gt;其中参数解析如下：&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;server：表示监听的地址，这里表示监听所有的地址；&lt;/li&gt;
-  &lt;li&gt;server_port： ss 服务器端口&lt;/li&gt;
+  &lt;li&gt;server_port： ss服务器端口&lt;/li&gt;
   &lt;li&gt;local_address：本地地址&lt;/li&gt;
   &lt;li&gt;local_port：本地端口&lt;/li&gt;
-  &lt;li&gt;password：连接 ss 密码。&lt;/li&gt;
-  &lt;li&gt;timeout：超时时间600秒。&lt;/li&gt;
+  &lt;li&gt;password：连接ss密码。&lt;/li&gt;
+  &lt;li&gt;timeout：超时时间(秒)。&lt;/li&gt;
   &lt;li&gt;method：通信加密方式。&lt;/li&gt;
   &lt;li&gt;fast_open ：true或false。开启fast_open以降低延迟，但要求Linux内核在3.7+。&lt;/li&gt;
-  &lt;li&gt;workers：工作线程数  &lt;br /&gt;
-5.&amp;gt; 为了方便启动和关闭 这里设置成自启动&lt;/li&gt;
+  &lt;li&gt;workers：工作线程数&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;5.&amp;gt; 为了方便启动和关闭 这里设置成自启动，命令如下&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;[root@vps19163870 ~]# vim /etc/systemd/system/shadowsocks.service&lt;/p&gt;
@@ -95,14 +100,23 @@ WantedBy=multi-user.target&lt;/p&gt;
 &lt;p&gt;6.&amp;gt; 启动Shadowsocks服务&lt;/p&gt;
 &lt;blockquote&gt;
   &lt;p&gt;[root@vps19163870 ~]# systemctl enable shadowsocks.service&lt;br /&gt;
-[root@vps19163870 ~]# systemctl start shadowsocks.service&lt;br /&gt;
+[root@vps19163870 ~]# systemctl start  shadowsocks.service&lt;br /&gt;
 [root@vps19163870 ~]# systemctl status shadowsocks.service&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;启动成功如下图
 &lt;img src=&quot;/images/posts/Shadowsocks/6.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;至此Shadowsocks已经搭建完成，客户端只需要配置一下就可以了。&lt;/p&gt;
+&lt;p&gt;至此Shadowsocks已经搭建完成。&lt;/p&gt;
+
+&lt;h3 id=&quot;客户端配置&quot;&gt;客户端配置&lt;/h3&gt;
+&lt;p&gt;1.&amp;gt;  最新版Shadowsocks/SS windows客户端下载&lt;br /&gt;
+本地下载：&lt;a href=&quot;https://netfiles.pw/download.php?filename=/ss/windows/Shadowsocks-4.3.1.128.zip&quot;&gt;Shadowsocks-4.3.1.0.zip&lt;/a&gt;&lt;br /&gt;
+官网下载：&lt;a href=&quot;https://github.com/shadowsocks/shadowsocks-windows/releases&quot;&gt;官网下载链接&lt;/a&gt;&lt;br /&gt;
+使用教程：&lt;a href=&quot;https://v2raytech.com/shadowsocks-windows-client-config-tutorial/&quot;&gt;Shadowsocks/SS windows客户端配置教程&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Windows平台下shadowsock官方版可能会出现大量“HTTP Auto Proxy Detection Worker Process”进程的bug，有大神进行了修复并提供修复版：&lt;a href=&quot;https://netfiles.pw/download.php?filename=/ss/windows/Shadowsocks-win-4.1.7.1-tlanyan.zip&quot;&gt;Shadowsocks-4.1.7.1修复版&lt;/a&gt;。如果你的系统没有这个问题，直接用最新官方版就可以。&lt;br /&gt;
+SS和SSR不是同一个东西，如果用的SSR，请到这个页面下载：&lt;a href=&quot;https://v2raytech.com/shadowsockr-shadowsocksr-ssr-windows-client-download/&quot;&gt;ShadowsocksR/SSR windows客户端下载&lt;/a&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 07 Sep 2021 00:00:00 +0800</pubDate>
@@ -214,7 +228,11 @@ V2RayX MAC
 放Google搜了一把，发现v2ray还真有这个配置，只是v2ray官方文档也没有很详细说这个问题，也只是带了一下,但是好歹也给我们提供了一种解决方式。&lt;br /&gt;
 按照文档中说的，我们可以在配置文件中添加一个listen字段，用于指定v2ray监听指定的IP。&lt;br /&gt;
 v2ray默认配置文件在/etc/v2ray/config.json，我们只需编辑这个文件并添加一行就行了：&lt;br /&gt;
-&lt;img src=&quot;/images/posts/v2ray/17.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/images/posts/v2ray/17.png&quot; alt=&quot;&quot; /&gt; 
+3.&amp;gt; 关闭防火墙&lt;/p&gt;
+&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;root@vps19163870 ~]# systemctl stop firewalld.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;4.&amp;gt; 使用v2ray update命令修改端口或者协议，例如选择mKCP_utp协议（默认是TCP协议）&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 07 Sep 2021 00:00:00 +0800</pubDate>

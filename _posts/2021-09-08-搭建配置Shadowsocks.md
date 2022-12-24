@@ -8,6 +8,7 @@ tag: 科学上网
 ###  服务器端的安装，配置
 1.>  系统要求 
 * CentOS 7.*  
+
 2.>  命令准备  
 * vim：  
 输入vim回车提示：
@@ -27,11 +28,12 @@ tag: 科学上网
 **pip** 是 Python 的包管理工具，这里我们用 pip 安装 shadowsocks。  
 Shadowsocks安装成功画面  
 ![](/images/posts/Shadowsocks/2.png)  
-4.> 配置Shadowsocks参数
-> [root@vps19163870 ~]# vim /etc/shadowsocks/shadowsocks.json  
+4.> 配置Shadowsocks参数  
+输入命令：vim /etc/shadowsocks.json  
+> [root@vps19163870 ~]# vim /etc/shadowsocks.json  
 
 > {  
-  "server":"113.124.107.176",  
+  "server":"0.0.0.0",  
   "server_port":443,  
   "local_address": "127.0.0.1",  
   "local_port":1080,  
@@ -44,15 +46,16 @@ Shadowsocks安装成功画面
 
 其中参数解析如下：
 * server：表示监听的地址，这里表示监听所有的地址；
-* server_port： ss 服务器端口
+* server_port： ss服务器端口
 * local_address：本地地址
 * local_port：本地端口
-* password：连接 ss 密码。
-* timeout：超时时间600秒。
+* password：连接ss密码。
+* timeout：超时时间(秒)。
 * method：通信加密方式。
 * fast_open ：true或false。开启fast_open以降低延迟，但要求Linux内核在3.7+。
 * workers：工作线程数    
-5.> 为了方便启动和关闭 这里设置成自启动 
+
+5.> 为了方便启动和关闭 这里设置成自启动，命令如下
 
 > [root@vps19163870 ~]# vim /etc/systemd/system/shadowsocks.service  
 
@@ -64,17 +67,28 @@ Description=Shadowsocks
 ExecStart=/usr/bin/sslocal -c /etc/shadowsocks.json  
 
 > [Install]  
-WantedBy=multi-user.target  
+WantedBy=multi-user.target    
 
 6.> 启动Shadowsocks服务
 > [root@vps19163870 ~]# systemctl enable shadowsocks.service  
-> [root@vps19163870 ~]# systemctl start shadowsocks.service  
+> [root@vps19163870 ~]# systemctl start  shadowsocks.service  
 > [root@vps19163870 ~]# systemctl status shadowsocks.service  
 
 启动成功如下图
 ![](/images/posts/Shadowsocks/6.png)  
 
-至此Shadowsocks已经搭建完成，客户端只需要配置一下就可以了。
+至此Shadowsocks已经搭建完成。
+
+###  客户端配置  
+1.>  最新版Shadowsocks/SS windows客户端下载  
+本地下载：[Shadowsocks-4.3.1.0.zip](https://netfiles.pw/download.php?filename=/ss/windows/Shadowsocks-4.3.1.128.zip)  
+官网下载：[官网下载链接](https://github.com/shadowsocks/shadowsocks-windows/releases)  
+使用教程：[Shadowsocks/SS windows客户端配置教程](https://v2raytech.com/shadowsocks-windows-client-config-tutorial/)
+
+Windows平台下shadowsock官方版可能会出现大量“HTTP Auto Proxy Detection Worker Process”进程的bug，有大神进行了修复并提供修复版：[Shadowsocks-4.1.7.1修复版](https://netfiles.pw/download.php?filename=/ss/windows/Shadowsocks-win-4.1.7.1-tlanyan.zip)。如果你的系统没有这个问题，直接用最新官方版就可以。  
+SS和SSR不是同一个东西，如果用的SSR，请到这个页面下载：[ShadowsocksR/SSR windows客户端下载](https://v2raytech.com/shadowsockr-shadowsocksr-ssr-windows-client-download/)
+
+
 
 
 

@@ -6,16 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <title>搭建配置Shadowsocks</title>
-  <meta name="description" content="服务器端的安装，配置1.&gt;  系统要求  CentOS 7.*2.&gt;  命令准备  vim：输入vim回车提示：">
+  <meta name="description" content="服务器端的安装，配置1.&gt;  系统要求  CentOS 7.*">
   <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="搭建配置Shadowsocks">
-  <meta name="twitter:description" content="服务器端的安装，配置1.&gt;  系统要求  CentOS 7.*2.&gt;  命令准备  vim：输入vim回车提示：">
+  <meta name="twitter:description" content="服务器端的安装，配置1.&gt;  系统要求  CentOS 7.*">
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="搭建配置Shadowsocks">
-  <meta property="og:description" content="服务器端的安装，配置1.&gt;  系统要求  CentOS 7.*2.&gt;  命令准备  vim：输入vim回车提示：">
+  <meta property="og:description" content="服务器端的安装，配置1.&gt;  系统要求  CentOS 7.*">
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
   
   <link rel="icon" type="image/png" href="/images/favicon.png" />
@@ -176,8 +176,11 @@
     <h3 id="服务器端的安装配置">服务器端的安装，配置</h3>
 <p>1.&gt;  系统要求</p>
 <ul>
-  <li>CentOS 7.*<br />
-2.&gt;  命令准备</li>
+  <li>CentOS 7.*</li>
+</ul>
+
+<p>2.&gt;  命令准备</p>
+<ul>
   <li>vim：<br />
 输入vim回车提示：</li>
 </ul>
@@ -201,14 +204,15 @@
 <strong>pip</strong> 是 Python 的包管理工具，这里我们用 pip 安装 shadowsocks。<br />
 Shadowsocks安装成功画面<br />
 <img src="/images/posts/Shadowsocks/2.png" alt="" /><br />
-4.&gt; 配置Shadowsocks参数</p>
+4.&gt; 配置Shadowsocks参数<br />
+输入命令：vim /etc/shadowsocks.json</p>
 <blockquote>
-  <p>[root@vps19163870 ~]# vim /etc/shadowsocks/shadowsocks.json</p>
+  <p>[root@vps19163870 ~]# vim /etc/shadowsocks.json</p>
 </blockquote>
 
 <blockquote>
   <p>{<br />
-  “server”:”113.124.107.176”,<br />
+  “server”:”0.0.0.0”,<br />
   “server_port”:443,<br />
   “local_address”: “127.0.0.1”,<br />
   “local_port”:1080,<br />
@@ -223,16 +227,17 @@ Shadowsocks安装成功画面<br />
 <p>其中参数解析如下：</p>
 <ul>
   <li>server：表示监听的地址，这里表示监听所有的地址；</li>
-  <li>server_port： ss 服务器端口</li>
+  <li>server_port： ss服务器端口</li>
   <li>local_address：本地地址</li>
   <li>local_port：本地端口</li>
-  <li>password：连接 ss 密码。</li>
-  <li>timeout：超时时间600秒。</li>
+  <li>password：连接ss密码。</li>
+  <li>timeout：超时时间(秒)。</li>
   <li>method：通信加密方式。</li>
   <li>fast_open ：true或false。开启fast_open以降低延迟，但要求Linux内核在3.7+。</li>
-  <li>workers：工作线程数  <br />
-5.&gt; 为了方便启动和关闭 这里设置成自启动</li>
+  <li>workers：工作线程数</li>
 </ul>
+
+<p>5.&gt; 为了方便启动和关闭 这里设置成自启动，命令如下</p>
 
 <blockquote>
   <p>[root@vps19163870 ~]# vim /etc/systemd/system/shadowsocks.service</p>
@@ -257,14 +262,23 @@ WantedBy=multi-user.target</p>
 <p>6.&gt; 启动Shadowsocks服务</p>
 <blockquote>
   <p>[root@vps19163870 ~]# systemctl enable shadowsocks.service<br />
-[root@vps19163870 ~]# systemctl start shadowsocks.service<br />
+[root@vps19163870 ~]# systemctl start  shadowsocks.service<br />
 [root@vps19163870 ~]# systemctl status shadowsocks.service</p>
 </blockquote>
 
 <p>启动成功如下图
 <img src="/images/posts/Shadowsocks/6.png" alt="" /></p>
 
-<p>至此Shadowsocks已经搭建完成，客户端只需要配置一下就可以了。</p>
+<p>至此Shadowsocks已经搭建完成。</p>
+
+<h3 id="客户端配置">客户端配置</h3>
+<p>1.&gt;  最新版Shadowsocks/SS windows客户端下载<br />
+本地下载：<a href="https://netfiles.pw/download.php?filename=/ss/windows/Shadowsocks-4.3.1.128.zip">Shadowsocks-4.3.1.0.zip</a><br />
+官网下载：<a href="https://github.com/shadowsocks/shadowsocks-windows/releases">官网下载链接</a><br />
+使用教程：<a href="https://v2raytech.com/shadowsocks-windows-client-config-tutorial/">Shadowsocks/SS windows客户端配置教程</a></p>
+
+<p>Windows平台下shadowsock官方版可能会出现大量“HTTP Auto Proxy Detection Worker Process”进程的bug，有大神进行了修复并提供修复版：<a href="https://netfiles.pw/download.php?filename=/ss/windows/Shadowsocks-win-4.1.7.1-tlanyan.zip">Shadowsocks-4.1.7.1修复版</a>。如果你的系统没有这个问题，直接用最新官方版就可以。<br />
+SS和SSR不是同一个东西，如果用的SSR，请到这个页面下载：<a href="https://v2raytech.com/shadowsockr-shadowsocksr-ssr-windows-client-download/">ShadowsocksR/SSR windows客户端下载</a></p>
 
 
 
@@ -424,7 +438,7 @@ WantedBy=multi-user.target</p>
 
         <div class = "footer_div">  
            <p class="copyright text-muted" style="text-align:center">
-            Copyright &copy; 零距离 2021 |
+            Copyright &copy; 零距离 2022 |
             <iframe
                 style="margin-left: 2px; margin-bottom:-5px;"
                 frameborder="0" scrolling="0" width="91px" height="20px"

@@ -271,7 +271,11 @@ V2RayX MAC
 放Google搜了一把，发现v2ray还真有这个配置，只是v2ray官方文档也没有很详细说这个问题，也只是带了一下,但是好歹也给我们提供了一种解决方式。<br />
 按照文档中说的，我们可以在配置文件中添加一个listen字段，用于指定v2ray监听指定的IP。<br />
 v2ray默认配置文件在/etc/v2ray/config.json，我们只需编辑这个文件并添加一行就行了：<br />
-<img src="/images/posts/v2ray/17.png" alt="" /></p>
+<img src="/images/posts/v2ray/17.png" alt="" /> 
+3.&gt; 关闭防火墙</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@vps19163870 ~]# systemctl stop firewalld.service
+</code></pre></div></div>
+<p>4.&gt; 使用v2ray update命令修改端口或者协议，例如选择mKCP_utp协议（默认是TCP协议）</p>
 
 
 
@@ -436,7 +440,7 @@ v2ray默认配置文件在/etc/v2ray/config.json，我们只需编辑这个文�
 
         <div class = "footer_div">  
            <p class="copyright text-muted" style="text-align:center">
-            Copyright &copy; 零距离 2021 |
+            Copyright &copy; 零距离 2022 |
             <iframe
                 style="margin-left: 2px; margin-bottom:-5px;"
                 frameborder="0" scrolling="0" width="91px" height="20px"
